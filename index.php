@@ -1,2 +1,2 @@
-Gatherly IONOS LFB
-test2
+<?php
+echo $slug1;
