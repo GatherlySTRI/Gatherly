@@ -1,2 +1,2 @@
 <?php
-echo "Hello from home.php!"
+echo "Hello from home.php!";
