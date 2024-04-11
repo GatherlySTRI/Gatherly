@@ -10,16 +10,16 @@ if (empty($_GET['slug'])) //S'il n'y pas de slug.
     $slug0 = $slug[0];
     $slug1 = $slug[1];
 
-    //TODO: acceder au controlleur
+    if (empty($slug1))
+    {
+        require_once("controllers/$slug0.php");
+    } else {
+        require_once("controllers/$slug0/$slug1.php");
+    }
 
 } else { //S'il n'y a pas de slash.
     $slug = trim($_GET['slug']);
-    $slug = str_replace(" ", "", $slug);
-    $slug = str_replace("\n", "", $slug);
 
     //TODO: acceder au controlleur
-    echo "ICI : $slug";
-    $controller = "controllers/".$slug.".php";
-    echo "ICI : $controller";
     require_once($controller);
 }
