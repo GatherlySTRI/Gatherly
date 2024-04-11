@@ -16,7 +16,7 @@ if (empty($_GET['slug'])) //S'il n'y pas de slug.
     $slug = $_GET['slug'];
 
     //TODO: acceder au controlleur
-
+    echo "ICI : $slug";
     $controller = "controllers/$slug.php";
     require_once($controller);
 }
