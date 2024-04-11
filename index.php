@@ -13,7 +13,7 @@ if (empty($_GET['slug'])) //S'il n'y pas de slug.
     //TODO: acceder au controlleur
 
 } else { //S'il n'y a pas de slash.
-    $slug = $_GET['slug'];
+    $slug = trim($_GET['slug']);
     $slug = str_replace(" ", "", $slug);
     $slug = str_replace("\n", "", $slug);
 
