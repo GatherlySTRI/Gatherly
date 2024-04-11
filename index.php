@@ -3,7 +3,7 @@
 
 if (empty($_GET['slug'])) //S'il n'y pas de slug.
 {
-    require_once("controllers/home.php");
+    require_once("controllers/home/default.php");
     
 } elseif (strpos($_GET['slug'], "/") !== false) { //Si le slug contient un slash.
     $slug = explode("/", $_GET['slug']);
@@ -12,7 +12,7 @@ if (empty($_GET['slug'])) //S'il n'y pas de slug.
 
     if (empty($slug1))
     {
-        require_once("controllers/$slug0.php");
+        require_once("controllers/$slug0/default.php");
     } else {
         require_once("controllers/$slug0/$slug1.php");
     }
@@ -20,6 +20,5 @@ if (empty($_GET['slug'])) //S'il n'y pas de slug.
 } else { //S'il n'y a pas de slash.
     $slug = trim($_GET['slug']);
 
-    //TODO: acceder au controlleur
-    require_once($controller);
+    require_once("controllers/$slug/default.php");
 }
