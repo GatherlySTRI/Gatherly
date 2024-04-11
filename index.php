@@ -1,2 +1,2 @@
 <?php
-echo $slug1;
+echo $_GET['slug1'];
