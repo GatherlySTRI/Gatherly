@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gatherly</title>
+    <link href="public/output.css" rel="stylesheet">
+</head>
+<script>
+  function toggleDropdown() {
+    var dropdown = document.getElementById("dropdown");
+    dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+  }
+</script>
+<body>
+<!-- component -->
+  <nav class="bg-gray-800 shadow shadow-gray-300 w-100 px-8 md:px-auto">
+    <div class="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
+      <!-- Logo -->
+      <div class="text-yellow-500 md:order-1">
+        <p>Logo</p>
+      </div>
+      <div class="text-gray-300 order-3 w-full md:w-auto md:order-2">
+        <ul class="flex font-semibold justify-between">
+          <li class="md:px-4 md:py-2 hover:text-gray-200"><a href="#">Accueil</a></li>
+          <li class="md:px-4 md:py-2 hover:text-gray-200"><a href="#">Evènements</a></li>
+        </ul>
+      </div>
+      <div class="order-2 md:order-3">
+        <div class="relative text-gray-600 md:order-1">
+          <button onclick="toggleDropdown()" class="focus:outline-none">
+            <object data="public/images/account.svg" type="image/svg+xml" class="h-6 w-6 md:h-10 md:w-10">
+              <!-- Fallback content -->
+              <img src="public/images/account.png" alt="Paramètres">
+            </object>          
+          </button>
+          <div id="dropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10" style="display: none;">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Compte</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Aide</a>
+            <a href="#" class="block px-4 py-2 text-sm text-red-700 hover:bg-red-600 hover:text-white">Déconnexion</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+    {% block body %}{% endblock %}
+</body>
+</html>
