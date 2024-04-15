@@ -147,17 +147,17 @@ CREATE TABLE Phase_Poule(
     id_phase_poule_arbre INT NOT NULL REFERENCES Arbre(id_arbre)
 );
 
-CREATE TABLE Match(
-    id_match SERIAL PRIMARY KEY,
+CREATE TABLE Match_Rugby(
+    id_match_rugby SERIAL PRIMARY KEY,
     id_adresse_API INT,
-    date_match DATE,
-    heure_match TIME
+    date_match_rugby DATE,
+    heure_match_rugby TIME
 );
 
 CREATE TABLE Aller_Retour(
     id_aller_retour SERIAL PRIMARY KEY,
-    id_match_aller INT NOT NULL REFERENCES Match(id_match),
-    id_match_retour INT NOT NULL REFERENCES Match(id_match),
+    id_match_rugby_aller INT NOT NULL REFERENCES Match_Rugby(id_match_rugby),
+    id_match_rugby_retour INT NOT NULL REFERENCES Match_Rugby(id_match_rugby),
     id_phase_A_R_aller_retour INT NOT NULL REFERENCES Phase_A_R(id_phase_a_r)
 );
 
@@ -172,7 +172,7 @@ CREATE TABLE Phase_Arbre(
 CREATE TABLE Etape_Contient(
     id_etape_contient SERIAL PRIMARY KEY,
     id_phase_arbre_etape INT NOT NULL REFERENCES Phase_Arbre(id_phase_arbre),
-    id_match_etape INT NOT NULL REFERENCES Match(id_match)
+    id_match_rugby_etape INT NOT NULL REFERENCES Match_Rugby(id_match_rugby)
 );
 
 CREATE TABLE Poule(
@@ -185,22 +185,58 @@ CREATE TABLE Poule(
 CREATE TABLE Poule_Contient(
     id_poule_contient SERIAL PRIMARY KEY,
     id_poule_poule_contient INT NOT NULL REFERENCES Poule(id_poule),
-    id_match_poule_contient INT NOT NULL REFERENCES Match(id_match)
+    id_match_rugby_poule_contient INT NOT NULL REFERENCES Match_Rugby(id_match_rugby)
 );
 
 CREATE TABLE Acceder(
-    id_acceder INT SERIAL PRIMARY KEY,
+    id_acceder SERIAL PRIMARY KEY,
     id_billet_acceder INT NOT NULL REFERENCES Billet(id_billet),
-    id_match_acceder INT NOT NULL REFERENCES Match(id_match)
-)
+    id_match_rugby_acceder INT NOT NULL REFERENCES Match_Rugby(id_match_rugby)
+);
 
 CREATE TABLE Equipe(
     id_equipe SERIAL PRIMARY KEY,
-    nom_equipe VARCHAR(255),
+    nom_equipe VARCHAR(255)
 );
 
 CREATE TABLE Composer(
     id_composer SERIAL PRIMARY KEY,
     id_membre_equipe_composer INT NOT NULL REFERENCES Membre_Equipe(id_membre),
     id_equipe_composer INT NOT NULL REFERENCES Equipe(id_equipe)
+);
+
+CREATE TABLE Recompense(
+    id_recompense SERIAL PRIMARY KEY,
+    nom_recompense VARCHAR(255),
+    categorie_recompense VARCHAR(255)
+);
+
+CREATE TABLE Recevoir_Recompense(
+    id_recevoir_recompense SERIAL PRIMARY KEY,
+    id_recompense_recevoir_recompense INT NOT NULL REFERENCES Recompense(id_recompense),
+    id_equipe_recevoir_recompense INT NOT NULL REFERENCES Equipe(id_equipe)
+);
+
+CREATE TABLE Attribuer_Recompense(
+    id_attribuer_recompense SERIAL PRIMARY KEY,
+    id_evenement_attribuer_recompense INT NOT NULL REFERENCES Evenement(id_evenement),
+    id_recompense_attribuer_recompense INT NOT NULL REFERENCES Recompense(id_recompense)
+);
+
+CREATE TABLE Jouer(
+    id_jouer SERIAL PRIMARY KEY,
+    id_match_rugby_jouer INT NOT NULL REFERENCES Match_Rugby(id_match_rugby),
+    id_equipe_jouer INT NOT NULL REFERENCES Equipe(id_equipe)
+);
+
+CREATE TABLE Disputer(
+    id_disputer SERIAL PRIMARY KEY,
+    id_match_disputer INT NOT NULL REFERENCES Match_Rugby(id_match_rugby),
+    id_evenement_disputer INT NOT NULL REFERENCES Evenement(id_evenement)
+);
+
+CREATE TABLE Arbitrer(
+    id_arbitrer SERIAL PRIMARY KEY,
+    id_arbitre_arbitrer INT NOT NULL REFERENCES Arbitre(id_arbitre),
+    id_match_arbitrer INT NOT NULL REFERENCES Match_Rugby(id_match_rugby)
 );
