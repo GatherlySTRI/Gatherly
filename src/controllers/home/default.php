@@ -1,7 +1,11 @@
 <?php
 require_once 'vendor/autoload.php';
 
-$loader = new \Twig\Loader\FilesystemLoader('src/view');
-$twig = new \Twig\Environment($loader);
+use models\humain\Personne;
+use Twig\Loader\FilesystemLoader;
+use Twig\Environment;
+
+$loader = new FilesystemLoader('src/view');
+$twig = new Environment($loader);
 
 echo $twig->render('home.html', ['var' => 'Twig fonctionne !']);

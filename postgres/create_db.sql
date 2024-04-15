@@ -7,20 +7,20 @@ CREATE DATABASE gatherly_db;
 
 CREATE TABLE Personne (
     id_personne SERIAL PRIMARY KEY,
-    prenomPersonne VARCHAR(100),
-    nomPersonne VARCHAR(100),
+    prenom_personne VARCHAR(100),
+    nom_personne VARCHAR(100),
     date_naissance DATE,
     sexe CHAR(1)
 );
 
 CREATE TABLE Arbitre (
     id_arbitre SERIAL PRIMARY KEY,
-    id_personne_arbitre INT NOT NULL REFERENCES Personne(id_personne)
+    id_personne_arbitre INT NOT NULL UNIQUE REFERENCES Personne(id_personne)
 );
 
 CREATE TABLE Utilisateur (
     id_utilisateur SERIAL PRIMARY KEY,
-    id_personne_utilisateur INT NOT NULL REFERENCES Personne(id_personne),
+    id_personne_utilisateur INT NOT NULL UNIQUE REFERENCES Personne(id_personne),
     mail VARCHAR(255),
     telephone VARCHAR(20),
     mdp VARCHAR(255),
