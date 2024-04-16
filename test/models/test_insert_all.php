@@ -21,6 +21,11 @@ try {
 
     $arbitre = new Arbitre(null, 1);
     $arbitre->save($db);
+    $arbitre_bd = new Arbitre();
+    $arbitre_bd = $arbitre_bd->find($db, 1);
+    $personne_arbitre = new Personne();
+    $personne_arbitre = $personne_arbitre->find($db, $arbitre_bd->get_id_arbitre());
+    echo $personne_arbitre->get_prenom_personne();
 
 } catch (Exception $e) {
     echo "TEST FAILED: $e\n";

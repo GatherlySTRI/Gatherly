@@ -6,14 +6,14 @@ use models\BaseEntity;
 
 class Personne extends BaseEntity {
     // Variables
-    private $id_personne;
-    private $prenom_personne;
-    private $nom_personne;
-    private $date_naissance;
-    private $sexe;
+    protected $id_personne;
+    protected $prenom_personne;
+    protected $nom_personne;
+    protected $date_naissance;
+    protected $sexe;
 
     // Constructeur
-    public function __construct($id_personne, $prenom_personne, $nom_personne, $date_naissance, $sexe) {
+    public function __construct($id_personne=null, $prenom_personne=null, $nom_personne=null, $date_naissance=null, $sexe=null) {
         $this->id_personne = $id_personne;
         $this->prenom_personne = $prenom_personne;
         $this->nom_personne = $nom_personne;

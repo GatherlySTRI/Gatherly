@@ -5,11 +5,11 @@ namespace models\humain;
 use models\BaseEntity;
 
 class Arbitre extends BaseEntity {
-    private $id_arbitre;
-    private $id_personne_arbitre;
+    protected $id_arbitre;
+    protected $id_personne_arbitre;
 
     // Constructeur
-    public function __construct($id_arbitre, $id_personne_arbitre) {
+    public function __construct($id_arbitre=null, $id_personne_arbitre=null) {
         $this->id_arbitre = $id_arbitre;
         $this->id_personne_arbitre = $id_personne_arbitre;
     }
