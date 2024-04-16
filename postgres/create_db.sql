@@ -1,10 +1,5 @@
 -- create_db.sql
 
-DROP DATABASE gatherly_db;
-CREATE DATABASE gatherly_db;
-
-\c gatherly_db;
-
 CREATE TABLE Personne (
     id_personne SERIAL PRIMARY KEY,
     prenom_personne VARCHAR(100),
@@ -48,7 +43,7 @@ CREATE TABLE Membre_Equipe (
     id_personne_membre INT NOT NULL REFERENCES Personne(id_personne),
     role_membre Role,
     poste VARCHAR(255)
-);
+); 
 
 CREATE TYPE Type_Rugby AS ENUM ('contact', 'toucher');
 CREATE TYPE Variante_Rugby AS ENUM ('15', '7', '13');
@@ -63,20 +58,23 @@ CREATE TABLE Evenement (
 );
 
 CREATE TABLE Organiser(
+    id_organiser SERIAL PRIMARY KEY,
     id_organisateur INT NOT NULL REFERENCES Utilisateur(id_utilisateur),
     id_evenement_organise INT NOT NULL REFERENCES Evenement(id_evenement),
     date_creation DATE
 );
 
 CREATE TABLE Participer(
+    id_participer SERIAL PRIMARY KEY,
     id_participant INT NOT NULL REFERENCES Membre_Equipe(id_membre),
     id_evenement_participe INT NOT NULL REFERENCES Evenement(id_evenement),
     date_inscription DATE
 );
 
 CREATE TABLE Assister(
+    id_asisster SERIAL PRIMARY KEY,
     id_spectateur INT NOT NULL REFERENCES Utilisateur(id_utilisateur),
-    id_evenement_assiste INT NOT NULL REFERENCES Evenement(id_evenement),
+    id_evenement_assister INT NOT NULL REFERENCES Evenement(id_evenement),
     date_achat DATE
 );
 

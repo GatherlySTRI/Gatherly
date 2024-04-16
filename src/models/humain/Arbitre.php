@@ -22,6 +22,15 @@ class Arbitre extends BaseEntity {
     public function get_id_personne_arbitre() {
         return $this->id_personne_arbitre;
     }
+
+    // Setters
+    public function set_id_arbitre($id_arbitre) {
+        $this->id_arbitre = $id_arbitre;
+    }
+
+    public function set_id_personne_arbitre($id_personne_arbitre) {
+        $this->id_personne_arbitre = $id_personne_arbitre;
+    }
 }
 
 ?>
