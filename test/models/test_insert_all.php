@@ -21,7 +21,7 @@ use models\organisation\Media;
 use models\organisation\Couvrir;
 use models\competition\Arbre;
 use models\competition\Phase_A_R;
-use models\compeittion\Phase_Poule;
+use models\competition\Phase_Poule;
 
 // Récupération des variables d'environnement pour la connection à la bd.
 $db_host = getenv('DB_HOST');
@@ -115,7 +115,7 @@ try {
     $phase_a_r = new Phase_A_R(null, 1, "2021-01-14", 1);
     $phase_a_r->save($db);
 
-    $phase_poule = new Phase_Poule(null, 2, "2021-01-14", "2021-01-14", 1);
+    $phase_poule = new Phase_Poule(null, 1, "2021-01-14", 1);
     $phase_poule->save($db);
 
     echo "TEST REUSSI\n";
