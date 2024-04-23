@@ -135,14 +135,14 @@ CREATE TABLE Phase_A_R(
     id_phase_a_r SERIAL PRIMARY KEY,
     id_evenement_phase_A_R INT NOT NULL REFERENCES Evenement(id_evenement),
     date_creation_A_R DATE,
-    id_phase_A_R_arbre INT REFERENCES Arbre(id_arbre)
+    id_arbre_phase_A_R INT REFERENCES Arbre(id_arbre)
 );
 
 CREATE TABLE Phase_Poule(
     id_phase_poule SERIAL PRIMARY KEY,
     id_evenement_phase_poule INT NOT NULL REFERENCES Evenement(id_evenement),
     date_creation_poule DATE,
-    id_phase_poule_arbre INT NOT NULL REFERENCES Arbre(id_arbre)
+    id_arbre_phase_poule INT NOT NULL REFERENCES Arbre(id_arbre)
 );
 
 CREATE TABLE Match_Rugby(
@@ -156,7 +156,7 @@ CREATE TABLE Aller_Retour(
     id_aller_retour SERIAL PRIMARY KEY,
     id_match_rugby_aller INT NOT NULL REFERENCES Match_Rugby(id_match_rugby),
     id_match_rugby_retour INT NOT NULL REFERENCES Match_Rugby(id_match_rugby),
-    id_phase_A_R_aller_retour INT NOT NULL REFERENCES Phase_A_R(id_phase_a_r)
+    id_aller_retour_phase_A_R_ INT NOT NULL REFERENCES Phase_A_R(id_phase_a_r)
 );
 
 CREATE TYPE Type_Phase_Arbre AS ENUM ('seizieme','huitieme', 'quart', 'demi', 'finale');

@@ -12,6 +12,16 @@ use models\organisation\Evenement;
 use models\organisation\Organiser;
 use models\organisation\Participer;
 use models\organisation\Assister;
+use models\organisation\Periode_Evenement;
+use models\organisation\Etat;
+use models\organisation\Statuer;
+use models\organisation\Sponsor;
+use models\organisation\Sponsoriser;
+use models\organisation\Media;
+use models\organisation\Couvrir;
+use models\competition\Arbre;
+use models\competition\Phase_A_R;
+use models\compeittion\Phase_Poule;
 
 // Récupération des variables d'environnement pour la connection à la bd.
 $db_host = getenv('DB_HOST');
@@ -52,9 +62,9 @@ try {
     $arbitre = new Arbitre(null, 1);
     $arbitre->save($db);
 
-    $utilisateur = new Utilisateur(null, 2, "t.collet974@gmail.com", "0784202855", "mdp", "true");
+    $utilisateur = new Utilisateur(null, 2, "mail@mail.com", "123456789", "mdp", "true");
     $utilisateur->save($db);
-    $utilisateur_2 = new Utilisateur(null, 5, "t.collet974@outlook.fr", "0784202855", "mdp", "true");
+    $utilisateur_2 = new Utilisateur(null, 5, "mail@mail.com", "123456789", "mdp", "true");
     $utilisateur_2->save($db);
 
     $billet = new Billet(null, "50", "Billet stylé pour le rugby", "VIP", "false");
@@ -78,6 +88,37 @@ try {
     $assister = new Assister(null, 2, 1, "2021-01-14");
     $assister->save($db);
 
+    $periode_evenement = new Periode_Evenement(null, 1, "2021-01-14", "2021-01-15");
+    $periode_evenement->save($db);
+
+    $etat = new Etat(null, 1, "false", "false");
+    $etat->save($db);
+
+    $statuer = new Statuer(null, 1, 1, "2021-01-14");
+    $statuer->save($db);
+
+    $sponsor = new Sponsor(null, "SponsorX", "sponsor@sponsor.com", "12345678");
+    $sponsor->save($db);
+
+    $sponsoriser = new Sponsoriser(null, 1, 1);
+    $sponsoriser->save($db);
+
+    $media = new Media(null, "mediaX", "media@mail.com", "123456789");
+    $media->save($db);
+
+    $couvrir = new Couvrir(null, 1, 1);
+    $couvrir->save($db);
+
+    $arbre = new Arbre(null, 1, "2021-01-14");
+    $arbre->save($db);
+
+    $phase_a_r = new Phase_A_R(null, 1, "2021-01-14", 1);
+    $phase_a_r->save($db);
+
+    $phase_poule = new Phase_Poule(null, 2, "2021-01-14", "2021-01-14", 1);
+    $phase_poule->save($db);
+
+    echo "TEST REUSSI\n";
 } catch (Exception $e) {
     echo "TEST FAILED: $e\n";
 }
