@@ -22,6 +22,21 @@ use models\organisation\Couvrir;
 use models\competition\Arbre;
 use models\competition\Phase_A_R;
 use models\competition\Phase_Poule;
+use models\competition\Match_Rugby;
+use models\competition\Aller_Retour;
+use models\competition\Phase_Arbre;
+use models\competition\Etape_Contient;
+use models\competition\Poule;
+use models\competition\Poule_Contient;
+use models\organisation\Acceder;
+use models\competition\Equipe;
+use models\organisation\Composer;
+use models\organisation\Recompense;
+use models\organisation\Recevoir_Recompense;
+use models\organisation\Attribuer_Recompense;
+use models\competition\Jouer;
+use models\organisation\Disputer;
+use models\organisation\Arbitrer;
 
 // Récupération des variables d'environnement pour la connection à la bd.
 $db_host = getenv('DB_HOST');
@@ -117,6 +132,60 @@ try {
 
     $phase_poule = new Phase_Poule(null, 1, "2021-01-14", 1);
     $phase_poule->save($db);
+
+    $match_rugby = new Match_Rugby(null, 1, "2021-01-14", "15:00:00");
+    $match_rugby->save($db);
+
+    $match_rugby_2 = new Match_Rugby(null, 1, "2021-01-14", "15:00:00");
+    $match_rugby_2->save($db);
+
+    $match_rugby_3 = new Match_Rugby(null, 1, "2021-01-14", "15:00:00");
+    $match_rugby_3->save($db);
+
+    $match_rugby_4 = new Match_Rugby(null, 1, "2021-01-14", "15:00:00");
+    $match_rugby_4->save($db);
+
+    $aller_retour = new Aller_Retour(null, 1, 2, 1);
+    $aller_retour->save($db);
+
+    $phase_arbre = new Phase_Arbre(null, 1, "huitieme");
+    $phase_arbre->save($db);
+
+    $etape_contient = new Etape_Contient(null, 1, 3);
+    $etape_contient->save($db);
+
+    $poule = new Poule(null, 1, "Groupe A", "2021-01-14");
+    $poule->save($db);
+
+    $poule_contient = new Poule_Contient(null, 1, 4);
+    $poule_contient->save($db);
+
+    $acceder = new Acceder(null, 1, 1);
+    $acceder->save($db);
+
+    $equipe = new Equipe(null, "EquipeX");
+    $equipe->save($db);
+
+    $composer = new Composer(null, 1, 1);
+    $composer->save($db);
+
+    $recompense = new Recompense(null, "Médaille d'or", "Or");
+    $recompense->save($db);
+
+    $recevoir_recompense = new Recevoir_Recompense(null, 1, 1);
+    $recevoir_recompense->save($db);
+
+    $attribuer_recompense = new Attribuer_Recompense(null, 1, 1);
+    $attribuer_recompense->save($db);
+
+    $jouer = new Jouer(null, 1, 1);
+    $jouer->save($db);
+
+    $disputer = new Disputer(null, 1, 1);
+    $disputer->save($db);
+
+    $arbitrer = new Arbitrer(null, 1, 1);
+    $arbitrer->save($db);
 
     echo "TEST REUSSI\n";
 } catch (Exception $e) {

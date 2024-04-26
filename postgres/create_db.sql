@@ -163,7 +163,7 @@ CREATE TYPE Type_Phase_Arbre AS ENUM ('seizieme','huitieme', 'quart', 'demi', 'f
 
 CREATE TABLE Phase_Arbre(
     id_phase_arbre SERIAL PRIMARY KEY,
-    id_phase_arbre_arbre INT NOT NULL REFERENCES Arbre(id_arbre),
+    id_arbre_phase_arbre INT NOT NULL REFERENCES Arbre(id_arbre),
     etape Type_Phase_Arbre
 );
 
