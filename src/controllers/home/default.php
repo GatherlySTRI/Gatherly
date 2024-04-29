@@ -8,4 +8,4 @@ use Twig\Environment;
 $loader = new FilesystemLoader('src/view');
 $twig = new Environment($loader);
 
-echo $twig->render('home.html', ['var' => 'Twig fonctionne !']);
+echo $twig->render('home.twig', ['var' => 'Twig fonctionne !']);

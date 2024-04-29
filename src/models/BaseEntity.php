@@ -4,12 +4,25 @@ namespace models;
 class BaseEntity { // NE PAS METTRE D'ATTRIBUT PROTECTED, CETTE VISIBILITE EST RESERVE AUX CLASSES FILLES
     private $data = [];
 
+    public function get_db_connector(){// Instanciation du connecteur de la BDD si il n'est pas présent
+        $db_host = getenv('DB_HOST');
+        $db_port = getenv('DB_PORT');
+        $db_name = getenv('DB_NAME');
+        $db_user = getenv('DB_USER');
+        $db_password = getenv('DB_PASSWORD');
+        $db = new \PDO("pgsql:host=$db_host;port=$db_port;dbname=$db_name", $db_user, $db_password);
+    }
+
     public function get_class_name(){
         $classNameParts = explode('\\', static::class);
         return end($classNameParts);
     }
 
-    public function save($db) {
+    public function save($db=null) { // Persistance des objets dans la BDD
+        if($db==null){
+            $db = $this->get_db_connector();
+        }
+        
         $this->getData();
 
         $fields = array_keys($this->data);
@@ -30,7 +43,7 @@ class BaseEntity { // NE PAS METTRE D'ATTRIBUT PROTECTED, CETTE VISIBILITE EST R
         $stmt->execute($values);
     }
 
-    public function find($db, $id) {
+    public function find($db, $id) { // Recherche de la ligne correspondant à l'objet dans la BDD
         $className = $this->get_class_name();
         $id_name = $this->get_primary_key_name();
 
@@ -52,7 +65,7 @@ class BaseEntity { // NE PAS METTRE D'ATTRIBUT PROTECTED, CETTE VISIBILITE EST R
         return $this;
     }
 
-    protected function getData() {
+    protected function getData() { // Récupération des propriétés de la table
         $reflectionClass = new \ReflectionClass($this);
         $properties = $reflectionClass->getProperties(\ReflectionProperty::IS_PROTECTED);
 
@@ -64,7 +77,7 @@ class BaseEntity { // NE PAS METTRE D'ATTRIBUT PROTECTED, CETTE VISIBILITE EST R
         return $this->data;
     }
 
-    protected function get_primary_key_name() {
+    protected function get_primary_key_name() { // Récupère le nom de la clé primaire
         $reflectionClass = new \ReflectionClass($this);
         $properties = $reflectionClass->getProperties(\ReflectionProperty::IS_PROTECTED);
 
