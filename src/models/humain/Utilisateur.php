@@ -76,9 +76,9 @@ class Utilisateur extends BaseEntity
         $this->telephone = $telephone;
     }
 
-    public function set_mdp($mdp)
+    public function set_mdp($hash)
     {
-        $this->mdp = password_hash($mdp, PASSWORD_DEFAULT); // Hash du mot de passe en BCrypt
+        $this->mdp = $hash;
     }
 
     public function set_est_admin($est_admin)
