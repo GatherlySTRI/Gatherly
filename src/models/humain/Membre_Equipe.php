@@ -1,6 +1,6 @@
 <?php
 
-namespace models\organisation;
+namespace models\humain;
 
 use models\BaseEntity;
 
