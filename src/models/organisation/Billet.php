@@ -9,15 +9,15 @@ class Billet extends BaseEntity {
     protected $prix;
     protected $description_billet;
     protected $categorie_billet;
-    protected $est_reduction;
+    protected $est_gratuit;
 
     // Constructeur
-    public function __construct($id_billet = null, $prix = null, $description_billet = null, $categorie_billet = null, $est_reduction = false) {
+    public function __construct($id_billet = null, $prix = null, $description_billet = null, $categorie_billet = null, $est_gratuit = false) {
         $this->id_billet = $id_billet;
         $this->prix = $prix;
         $this->description_billet = $description_billet;
         $this->categorie_billet = $categorie_billet;
-        $this->est_reduction = $est_reduction;
+        $this->est_gratuit = $est_gratuit;
     }
 
     // Getters
@@ -37,8 +37,8 @@ class Billet extends BaseEntity {
         return $this->categorie_billet;
     }
 
-    public function get_est_reduction() {
-        return $this->est_reduction;
+    public function get_est_gratuit() {
+        return $this->est_gratuit;
     }
 
     // Setters
@@ -54,8 +54,8 @@ class Billet extends BaseEntity {
         $this->categorie_billet = $categorie_billet;
     }
 
-    public function set_est_reduction($est_reduction) {
-        $this->est_reduction = $est_reduction;
+    public function set_est_gratuit($est_gratuit) {
+        $this->est_gratuit = $est_gratuit;
     }
 }
 

@@ -27,11 +27,12 @@ CREATE TABLE Billet (
     prix DECIMAL(5,2),
     description_billet VARCHAR(255),
     categorie_billet VARCHAR(255),
-    est_reduction BOOLEAN
+    est_gratuit BOOLEAN
 );
 
 CREATE TABLE Acheter (
     id_achat SERIAL PRIMARY KEY,
+    date_achat DATE NOT NULL,
     id_utilisateur_achat INT NOT NULL REFERENCES Utilisateur(id_utilisateur),
     id_billet_achat INT NOT NULL REFERENCES Billet(id_billet)
 );
