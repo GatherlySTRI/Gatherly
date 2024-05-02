@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+  },
+  "dependencies": {
+    "postcss-cli": "^11.0.0"
+  },
+  "scripts": {
+    "build-css": "npx tailwindcss -i public/style.css -o public/output.css --watch"
+  }
+}
