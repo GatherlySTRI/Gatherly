@@ -62,6 +62,12 @@ try {
     $db->exec($sql);
     // /!\ ATTENTION /!\ CETTE LIGNE VA SUPPRIMER LA BASE DE DONNEES ET LA RECREER. /!\ ATTENTION /!\
 
+    // Test pour les dev
+    $personne = new Personne(null, 'John', 'Doe', '2000-01-01', 'M');
+    $personne->save($db);
+    $utilisateur = new Utilisateur(null, 1, "mail@mail.com", "0123456789", md5("12345678"), "true");
+    $utilisateur->save($db);
+
     // Données de test personne
     $names = ["Pierre", "Paul", "Jacques", "Marie", "Sophie", "Nicolas", "Julien", "Jérôme","William", "Luka", "Alexy", "Alexei", "Py", "Hadopy", "Tommy", "Nathalie", "Céline", "Claire", "Éric", "Olivier", "Laurent", "Benoît", "Christophe", "Patrice", "Vincent", "Denis", "Marc", "Alexandre", "Antoine", "Philippe", "François", "Jean", "Luc", "Guy", "Hervé", "Bruno", "Alain", "Thierry", "Sébastien", "Christian", "Gérard","John", "Jane", "Sam", "Sara", "Michael", "Michelle", "David", "Danielle", "Robert", "Rebecca", "Daniel", "Diana", "James", "Jennifer", "Brian", "Brianna", "Kevin", "Kim", "Richard", "Rachel", "Paul", "Patricia", "Mark", "Megan", "Joseph", "Jessica", "Matthew", "Melissa", "Andrew", "Amanda", "Joshua", "Jacqueline", "Christopher", "Christine", "Nicholas", "Nicole"];
     $surnames = ["Martin", "Bernard", "Dubois", "Thomas", "Robert", "Petit", "Lafeve", "Juillet", "Oupiquant", "Boin-Rollex", "Ranha", "Sadouguy", "Collier", "Durand", "Leroy", "Moreau", "Simon", "Laurent", "Lefevre", "Michel", "Garcia", "David", "Bertrand", "Roux", "Vincent", "Fournier", "Morel", "Girard", "Andre", "Lefevre", "Mercier", "Dupont", "Lambert", "Bonnet", "Francois", "Martinez", "Legrand", "Garnier", "Faure", "Rousseau", "Blanc", "Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson", "Thomas", "Jackson", "White", "Harris", "Martin", "Thompson", "Garcia", "Martinez", "Robinson", "Clark", "Rodriguez", "Lewis", "Lee", "Walker", "Hall", "Allen", "Young", "Hernandez", "King", "Wright", "Lopez", "Hill", "Scott", "Green", "Adams"];

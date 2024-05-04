@@ -3,6 +3,13 @@ namespace controllers\register;
 
 require_once 'vendor/autoload.php';
 
+session_start();
+if (isset($_SESSION['id_utilisateur'])) {// Si l'utilisateur est connecté
+    // Redirection vers la page d'accueil
+    header('Location: /');
+    exit;
+}
+
 use models\humain\Personne;
 use models\humain\Utilisateur;
 use Twig\Loader\FilesystemLoader;
@@ -13,6 +20,8 @@ function verify_all_params($params) {// Vérification de la présence et validit
     $required_params = ['nom', 'prenom', 'date_naissance', 'sexe', 'email', 'telephone', 'mdp'];
     foreach ($required_params as $param) {
         if (!array_key_exists($param, $params) || $params[$param] == "") {
+            echo $param[$param];
+            exit;
             return false;
         }
     }
@@ -36,7 +45,6 @@ function verify_all_params($params) {// Vérification de la présence et validit
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {// Si la requête est de type POST
-
     // Initialisation des models
     $personne = new Personne();
     $utilisateur = new Utilisateur();
@@ -48,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {// Si la requête est de type POST
         // Renvoie vers la page login avec une variable qui active une popup
         $loader = new FilesystemLoader('src/view');
         $twig = new Environment($loader);
-        echo $twig->render("login.twig", ['email_exist' => true]);
+        echo $twig->render("login.twig", ['email_exist' => true, 'is_session' => isset($_SESSION['id_utilisateur'])]);
         exit;
     }
 
@@ -73,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {// Si la requête est de type POST
     //Redirection vers la page de login
     $loader = new FilesystemLoader('src/view');
     $twig = new Environment($loader);
-    echo $twig->render("login.twig", ['register_success' => true]);
+    echo $twig->render("login.twig", ['register_success' => true, 'is_session' => isset($_SESSION['id_utilisateur'])]);
 }
 elseif($_SERVER['REQUEST_METHOD'] === 'GET'){// Si la requête est de type GET
     //Chargement de la vue
