@@ -30,18 +30,25 @@
           <li class="md:px-4 md:py-2 hover:text-gray-200"><a href="#">Evènements</a></li>
         </ul>
       </div>
-      <div class="order-2 md:order-3">
-        <div class="relative text-gray-600 md:order-1">
-          <button onclick="toggleDropdown()" class="dropdown-button focus:outline-none">
-            <img src="public/images/account.svg" class="h-6 w-6 md:h-10 md:w-10" alt="Paramètres">
-          </button>
-          <div id="dropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10" style="display: none;">
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Compte</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Aide</a>
-            <a href="#" class="block px-4 py-2 text-sm text-red-700 hover:bg-red-600 hover:text-white">Déconnexion</a>
+      {% if is_session %}
+          <div class="order-2 md:order-3">
+              <div class="relative text-gray-600 md:order-1">
+                  <button onclick="toggleDropdown()" class="dropdown-button focus:outline-none">
+                      <img src="public/images/account.svg" class="h-6 w-6 md:h-10 md:w-10" alt="Paramètres">
+                  </button>
+                  <div id="dropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10" style="display: none;">
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Compte</a>
+                      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Aide</a>
+                      <a href="/logout" class="block px-4 py-2 text-sm text-red-700 hover:bg-red-600 hover:text-white">Déconnexion</a>
+                  </div>
+              </div>
           </div>
-        </div>
-      </div>
+        {% else %}
+            <div class="order-2 md:order-3 flex space-x-4">
+                <a href="/login" class="btn btn-primary bg-yellow-500 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded">Connexion</a>
+                <a href="/register" class="btn btn-secondary bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Inscription</a>
+            </div>
+        {% endif %}
     </div>
   </nav>
     {% block body %}{% endblock %}
