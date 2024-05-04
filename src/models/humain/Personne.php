@@ -48,7 +48,7 @@ class Personne extends BaseEntity {
     }
 
     public function set_nom_personne($nom_personne) {
-        $this->nomPersonne = $nomPersonne;
+        $this->nom_personne = $nom_personne;
     }
 
     public function set_date_naissance($date_naissance) {

@@ -99,7 +99,7 @@ try {
     for ($i=6; $i <=20; $i++) {
         $email = strtolower($names[$i]) . rand(1, 100) . "@" . $domains[array_rand($domains)];
         $phone = (rand(0, 1) == 0) ? "123456" . str_pad($i, 4, "0", STR_PAD_LEFT) : null;
-        $password = $passwords[array_rand($passwords)];
+        $password = md5($passwords[array_rand($passwords)]);
 
         if ($i == 9 || $i ==10 || $i == 11){
             $utilisateur = new Utilisateur(null, $i, $email, $phone, $password, "true");
