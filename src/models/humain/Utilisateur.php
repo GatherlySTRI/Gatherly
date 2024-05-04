@@ -71,5 +71,12 @@ class Utilisateur extends BaseEntity {
     public function set_est_admin($est_admin) {
         $this->est_admin = $est_admin;
     }
+
+    // Fonctions Utiles
+    public static function is_mail_exist($db=null, $mail) {
+        $personne = new Utilisateur();
+        $personne->find_by_column($db, "mail", $mail);
+        return $personne->get_id_utilisateur() != null;
+    }
 }
 ?>

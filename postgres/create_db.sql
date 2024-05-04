@@ -5,7 +5,7 @@ CREATE TABLE Personne (
     prenom_personne VARCHAR(100),
     nom_personne VARCHAR(100),
     date_naissance DATE,
-    sexe CHAR(1)
+    sexe CHAR(10)
 );
 
 CREATE TABLE Arbitre (
