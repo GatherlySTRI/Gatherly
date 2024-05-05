@@ -46,7 +46,11 @@ class BaseEntity { // NE PAS METTRE D'ATTRIBUT PROTECTED, CETTE VISIBILITE EST R
         return $db;
     }
 
-    public function find($db, $id) { // Recherche de la ligne correspondant à l'objet dans la BDD
+    public function find($db=null, $id) { // Recherche de la ligne correspondant à l'objet dans la BDD
+        if($db==null){
+            $db = $this->get_db_connector();
+        }
+
         $className = $this->get_class_name();
         $id_name = $this->get_primary_key_name();
 
@@ -93,7 +97,23 @@ class BaseEntity { // NE PAS METTRE D'ATTRIBUT PROTECTED, CETTE VISIBILITE EST R
         return $this;
     }	
 
-    protected function getData() { // Récupération des propriétés de la table
+    public function delete($db=null) { // Suppression de l'objet dans la BDD
+        if($db==null){
+            $db = $this->get_db_connector();
+        }
+
+        $className = $this->get_class_name();
+        $id_name = $this->get_primary_key_name();
+
+        $sql = "DELETE FROM $className WHERE $id_name = :id";
+    
+        $stmt = $db->prepare($sql);
+        $stmt->execute([':id' => $this->{$id_name}]);
+    
+        return $this;
+    }
+
+    public function getData() { // Récupération des propriétés de la table
         $reflectionClass = new \ReflectionClass($this);
         $properties = $reflectionClass->getProperties(\ReflectionProperty::IS_PROTECTED);
 

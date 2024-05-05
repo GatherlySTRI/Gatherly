@@ -1,0 +1,55 @@
+{% extends 'base.twig' %}
+
+{% block body %}
+<form action="/event/create" method="POST" class="max-w-md mx-auto mt-4">
+    <div class="bg-yellow-500 text-white px-2 py-1 rounded-md shadow-lg mb-4">
+        Nouvel évènement
+    </div>
+    <div class="mb-4">
+        <label for="nom" class="block text-gray-700 text-sm font-bold mb-2">Nom</label>
+        <input type="text" id="nom" name="nom" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    </div>
+    <div class="mb-4">
+        <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description</label>
+        <textarea id="description" name="description" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+    </div>
+    <div class="mb-4">
+        <label for="type" class="block text-gray-700 text-sm font-bold mb-2">Type de rugby</label>
+        <select id="type" name="type" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <option value="">Sélectionnez</option>
+            <option value="contact">Contact</option>
+            <option value="touche">Touché</option>
+        </select>
+    </div>
+    <div class="mb-4">
+        <label for="variante" class="block text-gray-700 text-sm font-bold mb-2">Variante</label>
+        <select id="variante" name="variante" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <option value="">Sélectionnez</option>
+            <option value="15">15</option>
+            <option value="13">13</option>
+            <option value="7">7</option>
+        </select>
+    </div>
+    <div class="mb-4">
+        <label for="categorie" class="block text-gray-700 text-sm font-bold mb-2">Catégorie</label>
+        <select id="categorie" name="categorie" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <option value="">Sélectionnez</option>
+            <option value="match_simple">Match simple</option>
+            <option value="championnat_poule">Championnat simple</option>
+            <option value="championnat_a_r">Championnat avec Aller-Retour</option>
+            <option value="championnat_poule">Championnat avec phase de poule</option>
+        </select>
+    </div>
+    <div class="mb-4">
+        <label for="date_debut" class="block text-gray-700 text-sm font-bold mb-2">Date de début</label>
+        <input type="date" id="date_debut" name="date_debut" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    </div>
+    <div class="mb-4">
+        <label for="date_fin" class="block text-gray-700 text-sm font-bold mb-2">Date de fin</label>
+        <input type="date" id="date_fin" name="date_fin" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    </div>
+    <div class="mb-6">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Créer un évènement</button>
+    </div>
+</form>
+{% endblock %}
