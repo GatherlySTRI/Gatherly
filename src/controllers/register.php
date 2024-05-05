@@ -20,8 +20,6 @@ function verify_all_params($params) {// Vérification de la présence et validit
     $required_params = ['nom', 'prenom', 'date_naissance', 'sexe', 'email', 'telephone', 'mdp'];
     foreach ($required_params as $param) {
         if (!array_key_exists($param, $params) || $params[$param] == "") {
-            echo $param[$param];
-            exit;
             return false;
         }
     }
