@@ -39,11 +39,11 @@ use models\organisation\Disputer;
 use models\organisation\Arbitrer;
 
 // Récupération des variables d'environnement pour la connection à la bd.
-$db_host = getenv('DB_HOST');
-$db_port = getenv('DB_PORT');
-$db_name = getenv('DB_NAME');
-$db_user = getenv('DB_USER');
-$db_password = getenv('DB_PASSWORD');
+$db_host = getenv('DB_HOST') ?: '127.0.0.1';
+$db_port = getenv('DB_PORT') ?: '5432';
+$db_name = getenv('DB_NAME') ?: 'gatherly_db';
+$db_user = getenv('DB_USER') ?: 'postgres';
+$db_password = getenv('DB_PASSWORD') ?: 'postgres';
 
 // Fichier de tests des classes models.
 
