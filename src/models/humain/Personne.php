@@ -54,7 +54,7 @@ class Personne extends BaseEntity
     {
         $this->prenom_personne = $prenom_personne;
     }
-
+  
     public function set_nom_personne($nomPersonne)
     {
         $this->nom_personne = $nomPersonne;

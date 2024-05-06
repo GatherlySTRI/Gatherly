@@ -39,11 +39,11 @@ use models\organisation\Disputer;
 use models\organisation\Arbitrer;
 
 // Récupération des variables d'environnement pour la connection à la bd.
-$db_host = getenv('DB_HOST');
-$db_port = getenv('DB_PORT');
-$db_name = getenv('DB_NAME');
-$db_user = getenv('DB_USER');
-$db_password = getenv('DB_PASSWORD');
+$db_host = getenv('DB_HOST') ?: '127.0.0.1';
+$db_port = getenv('DB_PORT') ?: '5432';
+$db_name = getenv('DB_NAME') ?: 'gatherly_db';
+$db_user = getenv('DB_USER') ?: 'postgres';
+$db_password = getenv('DB_PASSWORD') ?: 'postgres';
 
 // Fichier de tests des classes models.
 
@@ -61,6 +61,12 @@ try {
     $sql = file_get_contents('postgres/create_db.sql');
     $db->exec($sql);
     // /!\ ATTENTION /!\ CETTE LIGNE VA SUPPRIMER LA BASE DE DONNEES ET LA RECREER. /!\ ATTENTION /!\
+
+    // Test pour les dev
+    $personne = new Personne(null, 'John', 'Doe', '2000-01-01', 'M');
+    $personne->save($db);
+    $utilisateur = new Utilisateur(null, 1, "mail@mail.com", "0123456789", md5("12345678"), "true");
+    $utilisateur->save($db);
 
     // Données de test personne
     $names = ["Pierre", "Paul", "Jacques", "Marie", "Sophie", "Nicolas", "Julien", "Jérôme","William", "Luka", "Alexy", "Alexei", "Py", "Hadopy", "Tommy", "Nathalie", "Céline", "Claire", "Éric", "Olivier", "Laurent", "Benoît", "Christophe", "Patrice", "Vincent", "Denis", "Marc", "Alexandre", "Antoine", "Philippe", "François", "Jean", "Luc", "Guy", "Hervé", "Bruno", "Alain", "Thierry", "Sébastien", "Christian", "Gérard","John", "Jane", "Sam", "Sara", "Michael", "Michelle", "David", "Danielle", "Robert", "Rebecca", "Daniel", "Diana", "James", "Jennifer", "Brian", "Brianna", "Kevin", "Kim", "Richard", "Rachel", "Paul", "Patricia", "Mark", "Megan", "Joseph", "Jessica", "Matthew", "Melissa", "Andrew", "Amanda", "Joshua", "Jacqueline", "Christopher", "Christine", "Nicholas", "Nicole"];
@@ -99,7 +105,7 @@ try {
     for ($i=6; $i <=20; $i++) {
         $email = strtolower($names[$i]) . rand(1, 100) . "@" . $domains[array_rand($domains)];
         $phone = (rand(0, 1) == 0) ? "123456" . str_pad($i, 4, "0", STR_PAD_LEFT) : null;
-        $password = $passwords[array_rand($passwords)];
+        $password = md5($passwords[array_rand($passwords)]);
 
         if ($i == 9 || $i ==10 || $i == 11){
             $utilisateur = new Utilisateur(null, $i, $email, $phone, $password, "true");
