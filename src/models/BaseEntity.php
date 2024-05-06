@@ -5,7 +5,7 @@ class BaseEntity { // NE PAS METTRE D'ATTRIBUT PROTECTED, CETTE VISIBILITE EST R
     private $data = [];
 
     public function get_db_connector(){// Instanciation du connecteur de la BDD si il n'est pas présent
-        $db_host = getenv('DB_HOST') ?: '127.0.0.1';
+        $db_host = getenv('DB_HOST') ?: 'gatherly_db';
         $db_port = getenv('DB_PORT') ?: '5432';
         $db_name = getenv('DB_NAME') ?: 'gatherly_db';
         $db_user = getenv('DB_USER') ?: 'postgres';

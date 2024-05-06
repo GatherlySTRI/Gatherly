@@ -1,5 +1,5 @@
 <?php
-
+ini_set('display_errors', '0');
 if (empty($_GET['slug'])) // S'il n'y pas de slug.
 {
     require_once("src/controllers/home/default.php");
