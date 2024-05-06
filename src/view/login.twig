@@ -2,4 +2,43 @@
 
 {% block body %}
 
+<div class="max-w-md mx-auto mt-4">
+
+    {% if email_exist %}
+        <div class="bg-red-500 text-white px-2 py-1 rounded-md shadow-lg mb-4">
+            Vous avez déjà un compte, veuillez vous connecter
+        </div>
+    {% endif %}
+
+    {% if register_success %}
+        <div class="bg-green-500 text-white px-2 py-1 rounded-md shadow-lg mb-4">
+            Création de compte réussi, veuillez vous connecter
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="bg-red-500 text-white px-2 py-1 rounded-md shadow-lg mb-4">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form action="/login" method="POST" class="mt-4">
+        <div class="mb-4">
+            <label for="mail" class="block text-gray-700 text-sm font-bold mb-2">Mail</label>
+            <input type="email" id="mail" name="mail" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="mb-4">
+            <label for="mdp" class="block text-gray-700 text-sm font-bold mb-2">Mot de passe</label>
+            <input type="password" id="mdp" name="mdp" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="mb-4">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Se connecter</button>
+        </div>
+        <p class="text-center text-gray-500 text-xs">
+            Pas de compte ? <a href="/register" class="text-blue-500 hover:text-blue-700">Créer un compte</a>
+        </p>
+    </form>
+
+</div>
+
 {% endblock %}

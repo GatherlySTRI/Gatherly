@@ -4,7 +4,11 @@
     },
     "autoload": {
         "psr-4": {
-            "models\\": "src/models"
+            "models\\": "src/models",
+            "controllers\\": "src/controllers",
+            "views\\": "src/views",
+            "tools\\": "src/controllers/tools",
+            "colors\\": "test/tools/colors"
         }
     }
 }
