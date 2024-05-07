@@ -39,7 +39,7 @@ use models\organisation\Disputer;
 use models\organisation\Arbitrer;
 
 // Récupération des variables d'environnement pour la connection à la bd.
-$db_host = getenv('DB_HOST') ?: '127.0.0.1';
+$db_host = getenv('DB_HOST') ?: 'gatherly_db';
 $db_port = getenv('DB_PORT') ?: '5432';
 $db_name = getenv('DB_NAME') ?: 'gatherly_db';
 $db_user = getenv('DB_USER') ?: 'postgres';
@@ -80,10 +80,10 @@ try {
     $roles = ["joueur", "entraineur"];
     $postes = ["ailier", "centre", "demi d'ouverture", "demi de mêlée", "troisième ligne aile", "deuxième ligne", "pilier", "talonneur", "arrière"];
 
-    $longueurNames = var_dump(count($names));
-    $longueurSurnames = var_dump(count($surnames));
-    echo $longueurNames;
-    echo $longueurSurnames;
+    // $longueurNames = var_dump(count($names));
+    // $longueurSurnames = var_dump(count($surnames));
+    // echo $longueurNames;
+    // echo $longueurSurnames;
 
     // Création de personnes
     for ($i = 0; $i < 77; $i++) {
@@ -174,7 +174,7 @@ try {
         // Génération aléatoire de dates
         $randomTimeStamp = rand(strtotime("2020-01-01"), strtotime("2023-12-31")); // Générer un timestamp aléatoire entre deux dates
         $Date = date("Y-m-d", $randomTimeStamp); // Convertir le timestamp en date
-        echo $Date."\n";
+        // echo $Date."\n";
 
         $organiser = new Organiser(null, $i, $cpt, $Date);
         $organiser->save($db);
@@ -196,7 +196,7 @@ try {
         // Récupérer la date de création
         $row = $query->fetch(PDO::FETCH_ASSOC);
         $eventCreationDate = $row['date_creation'];
-        echo $eventCreationDate."\n";
+        // echo $eventCreationDate."\n";
 
         // Boucle pour s'assurer que le randomTimeStamp est bien postérieur à la date de création de l'événement
         while ($Date < $eventCreationDate) {
@@ -217,14 +217,20 @@ try {
     for ($i=1; $i <=4; $i++) {
 
         // Requête pour récupérer la date de création de l'événement
-        $query = $db->prepare("SELECT date_creation FROM organiser WHERE id_organiser = :id_organiser");
-        $query->execute([':id_organiser' => $i]);
+        // $query = $db->prepare("SELECT date_creation FROM organiser WHERE id_organiser = :id_organiser");
+        // $query->execute([':id_organiser' => $i]);
 
         // Stocker la date de création
-        $row = $query->fetch(PDO::FETCH_ASSOC);
-        $eventCreationDate = $row['date_creation'];
-        echo $eventCreationDate."\n";
+        // $row = $query->fetch(PDO::FETCH_ASSOC);
+        // $eventCreationDate = $row['date_creation'];
+        // echo $eventCreationDate."\n";
 
+        $evenement6 = new Evenement();
+        $evenement6->find(null, $i);
+
+        $organiser = new Organiser();
+        $organiser->find_by_column(null, 'id_evenement_organise', $i);
+        
         $randomTimeStamp = rand(strtotime($eventCreationDate), strtotime(date("Y-m-d"))); 
         $DateDebutEvenement = date("Y-m-d", $randomTimeStamp); 
 
