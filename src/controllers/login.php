@@ -1,11 +1,12 @@
 <?php
 require_once 'vendor/autoload.php';
 
-session_start();
 // Vérifier si l'utilisateur est connecté
-if (isset($_SESSION['id_utilisateur'])) {
-    // L'utilisateur est connecté, rediriger vers la page d'accueil
+if (isset($_SESSION['id_utilisateur'])) {// Si l'utilisateur est connecté
+    // Redirection vers la page d'accueil
+    ob_start(); // Start output buffering
     header('Location: /');
+    ob_end_flush(); // End output buffering and flush the buffer
     exit;
 }
 
