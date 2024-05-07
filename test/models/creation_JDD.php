@@ -39,11 +39,11 @@ use models\organisation\Disputer;
 use models\organisation\Arbitrer;
 
 // Récupération des variables d'environnement pour la connection à la bd.
-$db_host = getenv('DB_HOST');
-$db_port = getenv('DB_PORT');
-$db_name = getenv('DB_NAME');
-$db_user = getenv('DB_USER');
-$db_password = getenv('DB_PASSWORD');
+$db_host = getenv('DB_HOST') ?: 'gatherly_db';
+$db_port = getenv('DB_PORT') ?: '5432';
+$db_name = getenv('DB_NAME') ?: 'gatherly_db';
+$db_user = getenv('DB_USER') ?: 'postgres';
+$db_password = getenv('DB_PASSWORD') ?: 'postgres';
 
 // Fichier de tests des classes models.
 
@@ -62,6 +62,12 @@ try {
     $db->exec($sql);
     // /!\ ATTENTION /!\ CETTE LIGNE VA SUPPRIMER LA BASE DE DONNEES ET LA RECREER. /!\ ATTENTION /!\
 
+    // Test pour les dev
+    $personne = new Personne(null, 'John', 'Doe', '2000-01-01', 'M');
+    $personne->save($db);
+    $utilisateur = new Utilisateur(null, 1, "mail@mail.com", "0123456789", md5("12345678"), "true");
+    $utilisateur->save($db);
+
     // Données de test personne
     $names = ["Pierre", "Paul", "Jacques", "Marie", "Sophie", "Nicolas", "Julien", "Jérôme","William", "Luka", "Alexy", "Alexei", "Py", "Hadopy", "Tommy", "Nathalie", "Céline", "Claire", "Éric", "Olivier", "Laurent", "Benoît", "Christophe", "Patrice", "Vincent", "Denis", "Marc", "Alexandre", "Antoine", "Philippe", "François", "Jean", "Luc", "Guy", "Hervé", "Bruno", "Alain", "Thierry", "Sébastien", "Christian", "Gérard","John", "Jane", "Sam", "Sara", "Michael", "Michelle", "David", "Danielle", "Robert", "Rebecca", "Daniel", "Diana", "James", "Jennifer", "Brian", "Brianna", "Kevin", "Kim", "Richard", "Rachel", "Paul", "Patricia", "Mark", "Megan", "Joseph", "Jessica", "Matthew", "Melissa", "Andrew", "Amanda", "Joshua", "Jacqueline", "Christopher", "Christine", "Nicholas", "Nicole"];
     $surnames = ["Martin", "Bernard", "Dubois", "Thomas", "Robert", "Petit", "Lafeve", "Juillet", "Oupiquant", "Boin-Rollex", "Ranha", "Sadouguy", "Collier", "Durand", "Leroy", "Moreau", "Simon", "Laurent", "Lefevre", "Michel", "Garcia", "David", "Bertrand", "Roux", "Vincent", "Fournier", "Morel", "Girard", "Andre", "Lefevre", "Mercier", "Dupont", "Lambert", "Bonnet", "Francois", "Martinez", "Legrand", "Garnier", "Faure", "Rousseau", "Blanc", "Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson", "Thomas", "Jackson", "White", "Harris", "Martin", "Thompson", "Garcia", "Martinez", "Robinson", "Clark", "Rodriguez", "Lewis", "Lee", "Walker", "Hall", "Allen", "Young", "Hernandez", "King", "Wright", "Lopez", "Hill", "Scott", "Green", "Adams"];
@@ -74,10 +80,10 @@ try {
     $roles = ["joueur", "entraineur"];
     $postes = ["ailier", "centre", "demi d'ouverture", "demi de mêlée", "troisième ligne aile", "deuxième ligne", "pilier", "talonneur", "arrière"];
 
-    $longueurNames = var_dump(count($names));
-    $longueurSurnames = var_dump(count($surnames));
-    echo $longueurNames;
-    echo $longueurSurnames;
+    // $longueurNames = var_dump(count($names));
+    // $longueurSurnames = var_dump(count($surnames));
+    // echo $longueurNames;
+    // echo $longueurSurnames;
 
     // Création de personnes
     for ($i = 0; $i < 77; $i++) {
@@ -99,7 +105,7 @@ try {
     for ($i=6; $i <=20; $i++) {
         $email = strtolower($names[$i]) . rand(1, 100) . "@" . $domains[array_rand($domains)];
         $phone = (rand(0, 1) == 0) ? "123456" . str_pad($i, 4, "0", STR_PAD_LEFT) : null;
-        $password = $passwords[array_rand($passwords)];
+        $password = md5($passwords[array_rand($passwords)]);
 
         if ($i == 9 || $i ==10 || $i == 11){
             $utilisateur = new Utilisateur(null, $i, $email, $phone, $password, "true");
@@ -168,7 +174,7 @@ try {
         // Génération aléatoire de dates
         $randomTimeStamp = rand(strtotime("2020-01-01"), strtotime("2023-12-31")); // Générer un timestamp aléatoire entre deux dates
         $Date = date("Y-m-d", $randomTimeStamp); // Convertir le timestamp en date
-        echo $Date."\n";
+        // echo $Date."\n";
 
         $organiser = new Organiser(null, $i, $cpt, $Date);
         $organiser->save($db);
@@ -190,7 +196,7 @@ try {
         // Récupérer la date de création
         $row = $query->fetch(PDO::FETCH_ASSOC);
         $eventCreationDate = $row['date_creation'];
-        echo $eventCreationDate."\n";
+        // echo $eventCreationDate."\n";
 
         // Boucle pour s'assurer que le randomTimeStamp est bien postérieur à la date de création de l'événement
         while ($Date < $eventCreationDate) {
@@ -211,14 +217,20 @@ try {
     for ($i=1; $i <=4; $i++) {
 
         // Requête pour récupérer la date de création de l'événement
-        $query = $db->prepare("SELECT date_creation FROM organiser WHERE id_organiser = :id_organiser");
-        $query->execute([':id_organiser' => $i]);
+        // $query = $db->prepare("SELECT date_creation FROM organiser WHERE id_organiser = :id_organiser");
+        // $query->execute([':id_organiser' => $i]);
 
         // Stocker la date de création
-        $row = $query->fetch(PDO::FETCH_ASSOC);
-        $eventCreationDate = $row['date_creation'];
-        echo $eventCreationDate."\n";
+        // $row = $query->fetch(PDO::FETCH_ASSOC);
+        // $eventCreationDate = $row['date_creation'];
+        // echo $eventCreationDate."\n";
 
+        $evenement6 = new Evenement();
+        $evenement6->find(null, $i);
+
+        $organiser = new Organiser();
+        $organiser->find_by_column(null, 'id_evenement_organise', $i);
+        
         $randomTimeStamp = rand(strtotime($eventCreationDate), strtotime(date("Y-m-d"))); 
         $DateDebutEvenement = date("Y-m-d", $randomTimeStamp); 
 

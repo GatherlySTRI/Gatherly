@@ -2,3 +2,4 @@
 /.vscode
 /vendor
 /public/output.css
+set_env.sh
