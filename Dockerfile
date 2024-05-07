@@ -12,6 +12,7 @@ RUN curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
 RUN php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 # Set ServerName to suppress Apache warnings
 RUN echo 'ServerName localhost' >> /etc/apache2/apache2.conf
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 # Set the working directory to /var/www/html
 WORKDIR /var/www/html
 # Copy the source code in /www into the container at /var/www/html
