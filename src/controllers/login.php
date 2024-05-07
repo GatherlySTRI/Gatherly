@@ -16,8 +16,6 @@ use Twig\Environment;
 $loader = new FilesystemLoader('src/view');
 $twig = new Environment($loader);
 
-
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $utilisateur = new Utilisateur();
     $utilisateur->find_by_column(null, 'mail', $_POST['mail']);
