@@ -4,10 +4,11 @@ namespace controllers\register;
 
 require_once 'vendor/autoload.php';
 
-session_start();
 if (isset($_SESSION['id_utilisateur'])) {// Si l'utilisateur est connecté
     // Redirection vers la page d'accueil
+    ob_start(); // Start output buffering
     header('Location: /');
+    ob_end_flush(); // End output buffering and flush the buffer
     exit;
 }
 
@@ -20,13 +21,12 @@ use tools\form_tools;
 
 function verify_all_params($params)
 { // Vérification de la présence et validité des paramètres
-    $required_params = ['name', 'prenom', 'date_naissance', 'sexe', 'email', 'telephone', 'password'];
+    $required_params = ['nom', 'prenom', 'date_naissance', 'sexe', 'email', 'telephone', 'mdp'];
     foreach ($required_params as $param) {
         if (!array_key_exists($param, $params) || $params[$param] == "") {
             return false;
         }
     }
-
     if (!form_tools::is_date_valid($params['date_naissance'])) {// Vérification de la validité de la date
 
         return false;
@@ -34,7 +34,7 @@ function verify_all_params($params)
         return false;
     } elseif (!preg_match('/^[0-9]{10}$/', $params['telephone'])) { // Vérification de la validité du numéro de téléphone
         return false;
-    } elseif (strlen($params['password']) < 8) { // Vérification de la validité du mot de passe
+    } elseif (strlen($params['mdp']) < 8) { // Vérification de la validité du mot de passe
         return false;
     } elseif ($params['sexe'] != 'homme' && $params['sexe'] != 'femme') { // Vérification de la validité du sexe
         return false;

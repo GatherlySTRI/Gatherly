@@ -1,0 +1,37 @@
+{% extends 'base.twig' %}
+
+{% block body %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Qui sommes-nous ? - Gatherly</title>
+    <link href="/public/output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-4 text-center">À propos de Gatherly</h1>
+        <div class="flex flex-col md:flex-row justify-between items-start">
+            <div class="text-gray-800 text-lg flex-1">
+                <h2 class="text-2xl font-semibold mb-3">Notre Vision</h2>
+                <p>Gatherly est une plateforme événementielle dédiée au rugby, conçue pour transformer la façon dont les événements sportifs sont créés, gérés et vécus. Basée à Toulouse, le cœur du rugby français, nous mettons à disposition des outils avancés pour la planification de tournois et de matchs, l’interaction des utilisateurs, et l’analyse statistique des données pour une meilleure prise de décision.</p>
+                <h2 class="text-2xl font-semibold mt-5 mb-3">Ce que nous offrons</h2>
+                <p>Nous proposons une solution tout-en-un qui permet :</p>
+                <ul class="list-disc pl-5 mb-4">
+                    <li>La création et gestion dynamique de compétitions de rugby à différents niveaux (tournois, championnats, matchs simples).</li>
+                    <li>Une plateforme multi-utilisateurs, facilitant les interactions entre organisateurs, équipes, et spectateurs.</li>
+                    <li>Des fonctionnalités innovantes comme les analyses statistiques détaillées et les systèmes de pronostics.</li>
+                </ul>
+                <h2 class="text-2xl font-semibold mt-5 mb-3">Notre Engagement envers l'Innovation</h2>
+                <p>À Gatherly, nous nous engageons à innover constamment. Nos fonctionnalités avancées et notre adaptabilité aux besoins des utilisateurs font de nous un choix privilégié pour les amateurs et professionnels du rugby.</p>
+                <h2 class="text-2xl font-semibold mt-5 mb-3">Pourquoi choisir Gatherly ?</h2>
+                <p>Choisir Gatherly, c'est opter pour une plateforme qui valorise la facilité d'utilisation, l'efficacité, et l'adaptabilité. Notre objectif est de fournir une expérience utilisateur exceptionnelle, soutenue par une technologie de pointe et un design réfléchi.</p>
+            </div>
+            <div class="w-32 h-auto ml-4 flex-none">
+                <!-- Image de calendrier, réduite et alignée à droite -->
+                <img src="/public/images/calendrier.png" alt="Calendrier des événements">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
