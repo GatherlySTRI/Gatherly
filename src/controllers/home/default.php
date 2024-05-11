@@ -1,7 +1,6 @@
 <?php
 require_once 'vendor/autoload.php';
 
-session_start();
 
 use models\humain\Personne;
 use Twig\Loader\FilesystemLoader;
