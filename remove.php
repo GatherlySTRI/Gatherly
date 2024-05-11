@@ -2,7 +2,7 @@
 
 require_once 'vendor/autoload.php';
 
-use models\humain\Utilisateur;
+use models\organisation\Evenement;
 use models\humain\Personne;
 
 
@@ -13,15 +13,9 @@ use models\humain\Personne;
 // $db_password = getenv('DB_PASSWORD');
 // $db = new \PDO("pgsql:host=$db_host;port=$db_port;dbname=$db_name", $db_user, $db_password);
 
-$personne = new Personne();
-$db = $personne->find($db, 101);
+$evenement = new Evenement();
+$evenement->find(null, 5);
 
-$personne->set_nom_personne('Joe_bis');
-$personne->set_prenom_personne('Doe_bis');
-$db = $personne->edit();
-
-$p = new Personne();
-$p->find($db, 100);
-var_dump($p);
-
+var_dump($evenement);
+$evenement->delete();
 ?>
