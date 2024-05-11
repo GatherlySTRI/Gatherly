@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
     elseif ($utilisateur->get_id_utilisateur() != null && $utilisateur->get_mdp() == md5($_POST['mdp'])){
+        session_destroy();
         session_start();
         $_SESSION['id_utilisateur'] = $utilisateur->get_id_utilisateur();
         header('Location: /');
