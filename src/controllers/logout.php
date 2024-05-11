@@ -2,8 +2,6 @@
 
 require_once 'vendor/autoload.php';
 
-session_start();
-
 // Destroy the session
 session_destroy();
 
