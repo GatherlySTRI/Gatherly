@@ -14,14 +14,14 @@ use models\humain\Personne;
 // $db = new \PDO("pgsql:host=$db_host;port=$db_port;dbname=$db_name", $db_user, $db_password);
 
 $personne = new Personne();
-$db = $personne->find($db, 100);
+$db = $personne->find($db, 101);
 
 $personne->set_nom_personne('Joe_bis');
 $personne->set_prenom_personne('Doe_bis');
-$db = $personne->edit($db);
+$db = $personne->edit();
 
 $p = new Personne();
-$p->find($db, $db->lastInsertId());
+$p->find($db, 100);
 var_dump($p);
 
 ?>
