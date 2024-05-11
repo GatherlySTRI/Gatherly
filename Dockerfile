@@ -22,5 +22,6 @@ ARG COMPOSER_ALLOW_SUPERUSER=1
 RUN composer install
 RUN npm install
 
+RUN php test/models/creation_JDD.php
 
 CMD ["apache2-foreground"]
