@@ -118,6 +118,47 @@ class BaseEntity
         return $this;
     }
 
+    public function edit($db = null){
+        if ($db == null) {
+            $db = $this->get_db_connector();
+        }
+
+        $this->getData();
+
+        $fields = array_keys($this->data);
+        $values = array_values($this->data);
+
+        if ($values[0] === null) {
+            array_shift($fields);
+            array_shift($values);
+        }
+
+        $className = $this->get_class_name();
+
+        // Create the SQL query
+        $sql = "UPDATE $className SET ";
+
+        // Add the fields and placeholders for the values
+        foreach ($fields as $field) {
+            $sql .= "$field = ?, ";
+        }
+
+        // Remove the last comma and space
+        $sql = rtrim($sql, ', ');
+
+        $primary_key = $this->get_primary_key_name();
+        // Add the WHERE clause to update the correct row
+        $sql .= " WHERE ".$primary_key." = ?";
+
+        // Add the id to the values array
+        $values[] = $this->data[$primary_key];
+
+        $stmt = $db->prepare($sql);
+        $stmt->execute($values);
+
+        return $db;
+    }
+
     public function getData() { // Récupération des propriétés de la table
 
         $reflectionClass = new \ReflectionClass($this);
