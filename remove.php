@@ -13,8 +13,8 @@ use models\humain\Personne;
 // $db_password = getenv('DB_PASSWORD');
 // $db = new \PDO("pgsql:host=$db_host;port=$db_port;dbname=$db_name", $db_user, $db_password);
 
-$personne = new Personne(null, 'John', 'Doe', '2000-01-01', 'M');
-$db = $personne->save(null);
+$personne = new Personne();
+$db = $personne->find($db, 100);
 
 $personne->set_nom_personne('Joe_bis');
 $personne->set_prenom_personne('Doe_bis');
