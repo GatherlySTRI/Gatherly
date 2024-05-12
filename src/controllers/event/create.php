@@ -3,11 +3,11 @@
 require_once('vendor/autoload.php');
 
 // Vérifier si l'utilisateur est connecté
-// if (!isset($_SESSION['id_utilisateur'])) {
-//     // L'utilisateur est connecté, rediriger vers la page d'accueil
-//     header('Location: /login');
-//     exit;
-// }
+if (!isset($_SESSION['id_utilisateur'])) {
+    // L'utilisateur est connecté, rediriger vers la page d'accueil
+    header('Location: /login');
+    exit;
+}
 
 use models\organisation\Evenement;
 use models\organisation\Organiser;
