@@ -6,7 +6,12 @@ use models\humain\Personne;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 
+use tools\event_tools;
+
 $loader = new FilesystemLoader('src/view');
 $twig = new Environment($loader);
 
-echo $twig->render('home.twig', ['is_session' => isset($_SESSION['id_utilisateur'])]);
+$events = event_tools::getAllEvents();
+
+
+echo $twig->render('home.twig', ['events' => $events, 'is_session' => isset($_SESSION['id_utilisateur'])]);
