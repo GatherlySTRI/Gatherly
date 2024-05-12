@@ -18,7 +18,8 @@ use Twig\Environment;
 $loader = new FilesystemLoader('src/view');
 $twig = new Environment($loader);
 
-function verify_all_params($params) {// Vérification de la présence et validité des paramètres
+function verify_all_params($params)
+{ // Vérification de la présence et validité des paramètres
     $required_params = ['nom', 'description', 'type', 'categorie', 'variante', 'date_debut', 'date_fin'];
     foreach ($required_params as $param) {
         if (!array_key_exists($param, $params) || $params[$param] == "") {
@@ -38,7 +39,7 @@ function verify_all_params($params) {// Vérification de la présence et validit
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!verify_all_params($_POST)) {// Si les paramètres sont invalides
+    if (!verify_all_params($_POST)) { // Si les paramètres sont invalides
         http_response_code(400);
         exit;
     }
@@ -52,14 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $periode_evenement = new Periode_Evenement(null, $evenement_id, $_POST['date_debut'], $_POST['date_fin']);
     $periode_evenement->save();
 
-    header('Location: /event/show?id='.$evenement_id);
-}
-elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    header('Location: /event/show?id=' . $evenement_id);
+} elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
     echo $twig->render("event/create.twig", ['is_session' => isset($_SESSION['id_utilisateur'])]);
-}
-else {
+} else {
     http_response_code(405);
     exit;
 }
-
-?>
