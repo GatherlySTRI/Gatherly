@@ -24,7 +24,7 @@
     }
   }
 </script>
-<body>
+<body class="flex-col min-h-screen">
 <!-- component -->
   <nav class="bg-gray-800 shadow shadow-gray-300 w-100 px-8 md:px-auto">
     <div class="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
@@ -37,7 +37,7 @@
           <li class="md:px-4 md:py-2 hover:text-gray-200"><a href="/">Accueil</a></li>
           <li class="md:px-4 md:py-2 hover:text-gray-200">
               <button onclick="toggleDropdownEvent()" class="dropdown-button focus:outline-none">
-                  Évènements
+                Évènements &#9662;
               </button>
               <div id="dropdown_event" class="absolute mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10" style="display: none;">
                   <a href="/event/create" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Créer un évènement</a>
