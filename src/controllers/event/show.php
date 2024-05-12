@@ -15,10 +15,14 @@ if (!isset($_SESSION['id_utilisateur'])) {
     exit;
 }
 
+
 if ($_SERVER['REQUEST_METHOD'] != 'GET') { // Vérification de la méthode de la requête
     http_response_code(405);
     exit;
 }
+
+
+
 
 // Initilisation des objets de la base de données
 $id_evenement = $_GET['id'];
