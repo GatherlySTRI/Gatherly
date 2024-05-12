@@ -22,5 +22,4 @@ ARG COMPOSER_ALLOW_SUPERUSER=1
 RUN composer install
 RUN npm install
 
-
 CMD ["apache2-foreground"]
