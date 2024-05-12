@@ -7,7 +7,8 @@ class BaseEntity
     private $data = [];
 
 
-    public function get_db_connector(){// Instanciation du connecteur de la BDD si il n'est pas présent
+    public function get_db_connector()
+    { // Instanciation du connecteur de la BDD si il n'est pas présent
         $db_host = getenv('DB_HOST') ?: 'gatherly_db';
         $db_port = getenv('DB_PORT') ?: '5432';
         $db_name = getenv('DB_NAME') ?: 'gatherly_db';
@@ -51,8 +52,9 @@ class BaseEntity
         return $db;
     }
 
-    public function find($db=null, $id) { // Recherche de la ligne correspondant à l'objet dans la BDD
-        if($db==null){
+    public function find($db = null, $id)
+    { // Recherche de la ligne correspondant à l'objet dans la BDD
+        if ($db == null) {
             $db = $this->get_db_connector();
         }
         $className = $this->get_class_name();
@@ -77,8 +79,9 @@ class BaseEntity
     }
 
 
-    public function find_by_column($db=null, $column_name, $column_value) { // Recherche de la ligne correspondant à l'objet dans la BDD selon la valeur d'une colonne
-        if($db==null){
+    public function find_by_column($db = null, $column_name, $column_value)
+    { // Recherche de la ligne correspondant à l'objet dans la BDD selon la valeur d'une colonne
+        if ($db == null) {
             $db = $this->get_db_connector();
         }
 
@@ -98,12 +101,13 @@ class BaseEntity
                 }
             }
         }
-    
-        return $this;
-    }	
 
-    public function delete($db=null) { // Suppression de l'objet dans la BDD
-        if($db==null){
+        return $this;
+    }
+
+    public function delete($db = null)
+    { // Suppression de l'objet dans la BDD
+        if ($db == null) {
             $db = $this->get_db_connector();
         }
 
@@ -111,14 +115,15 @@ class BaseEntity
         $id_name = $this->get_primary_key_name();
 
         $sql = "DELETE FROM $className WHERE $id_name = :id";
-    
+
         $stmt = $db->prepare($sql);
         $stmt->execute([':id' => $this->{$id_name}]);
-    
+
         return $this;
     }
 
-    public function edit($db = null){
+    public function edit($db = null)
+    {
         if ($db == null) {
             $db = $this->get_db_connector();
         }
@@ -148,7 +153,7 @@ class BaseEntity
 
         $primary_key = $this->get_primary_key_name();
         // Add the WHERE clause to update the correct row
-        $sql .= " WHERE ".$primary_key." = ?";
+        $sql .= " WHERE " . $primary_key . " = ?";
 
         // Add the id to the values array
         $values[] = $this->data[$primary_key];
@@ -159,7 +164,8 @@ class BaseEntity
         return $db;
     }
 
-    public function getData() { // Récupération des propriétés de la table
+    public function getData()
+    { // Récupération des propriétés de la table
 
         $reflectionClass = new \ReflectionClass($this);
         $properties = $reflectionClass->getProperties(\ReflectionProperty::IS_PROTECTED);
@@ -182,5 +188,22 @@ class BaseEntity
         // $this->data[$firstProperty->getName()] = $firstProperty->getValue($this);
 
         return $firstProperty->getName();
+    }
+
+    public function getAllLines($db = null)
+    {
+        if ($db == null) {
+            $db = $this->get_db_connector();
+        }
+
+        $table = $this->get_class_name();
+
+        // Préparez et exécutez la requête
+        $stmt = $db->prepare("SELECT * FROM $table");
+        $stmt->execute();
+
+        // Récupérez toutes les lignes en tant qu'instances de la classe actuelle
+        $result = $stmt->fetchAll();
+        return $result;
     }
 }
