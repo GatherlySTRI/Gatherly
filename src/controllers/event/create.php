@@ -1,6 +1,7 @@
 <?php
 
 require_once('vendor/autoload.php');
+require_once('src/controllers/event/tools.php');
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['id_utilisateur'])) {
@@ -17,26 +18,6 @@ use Twig\Environment;
 
 $loader = new FilesystemLoader('src/view');
 $twig = new Environment($loader);
-
-function verify_all_params($params)
-{ // Vérification de la présence et validité des paramètres
-    $required_params = ['nom', 'description', 'type', 'categorie', 'variante', 'date_debut', 'date_fin'];
-    foreach ($required_params as $param) {
-        if (!array_key_exists($param, $params) || $params[$param] == "") {
-            return false;
-        }
-    }
-    if ($params['variante'] != '15' && $params['variante'] != '13' && $params['variante'] != '7') {
-        return false;
-    }
-    if ($params['type'] != 'contact' && $params['type'] != 'touche') {
-        return false;
-    }
-    if ($params['date_debut'] > $params['date_fin']) {
-        return false;
-    }
-    return true;
-}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_all_params($_POST)) { // Si les paramètres sont invalides
