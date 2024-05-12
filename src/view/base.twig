@@ -31,9 +31,9 @@
           <li class="md:px-4 md:py-2 hover:text-gray-200"><a href="/nous">Qui sommes-nous ?</a></li> <!-- Lien mis à jour vers la page /nous -->
         </ul>
       </div>
-      {% if is_session %}
-          <div class="order-2 md:order-3">
-              <div class="relative text-gray-600 md:order-1">
+      {% if is_session %} <!-- Ajout de la condition pour afficher le bouton de déconnexion -->     
+          <div class="order-2 md:order-3">          
+              <div class="relative text-gray-600 md:order-1">                  
                   <button onclick="toggleDropdown()" class="dropdown-button focus:outline-none">
                       <img src="/public/images/account.svg" class="h-6 w-6 md:h-10 md:w-10" alt="Paramètres">
                   </button>
@@ -44,7 +44,7 @@
                   </div>
               </div>
           </div>
-        {% else %}
+        {% else %} <!-- Ajout de la condition pour afficher les boutons de connexion et d'inscription -->
             <div class="order-2 md:order-3 flex space-x-4">
                 <a href="/login" class="btn btn-primary bg-yellow-500 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded">Connexion</a>
                 <a href="/register" class="btn btn-secondary bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Inscription</a>
