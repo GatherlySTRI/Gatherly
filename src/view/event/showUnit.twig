@@ -2,9 +2,7 @@
     {% set nbOccurence = events|length %}
 {% endif %}
 
-
     {% for event in events|slice(0, nbOccurence) %}
-        {% if event.est_archive == false or event.est_archive is empty %}
         <div class="bg-white shadow-lg rounded-lg overflow-hidden max-w-sm">
             <div class="px-4 pt-4 pb-2 bg-gray-100 flex justify-between items-center">
             <div class="bg-yellow-300 text-yellow-900 text-xs font-semibold px-2 py-1 rounded">Rugby à {{ event.variante_rugby }}</div>
@@ -32,5 +30,4 @@
             </div>
             </div>
         </div>
-        {% endif %}
     {% endfor %}
