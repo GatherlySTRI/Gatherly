@@ -48,4 +48,4 @@ if (!verify_right($id_evenement, $id_utilisateur)) { // Vérification que l'év�
 $loader = new FilesystemLoader('src/view');
 $twig = new Environment($loader);
 
-echo $twig->render("event/show.twig", ['evenement' => $evenement->getData(), 'organiser' => $organiser, 'is_session' => isset($_SESSION['id_utilisateur'])]);
+echo $twig->render("event/show.twig", ['evenement' => $evenement->getData(), 'organiser' => $organiser, 'is_session' => isset($_SESSION['id_utilisateur']), 'is_admin' => $_SESSION['est_Admin']]);

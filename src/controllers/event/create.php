@@ -13,6 +13,7 @@ if (!isset($_SESSION['id_utilisateur'])) {
 use models\organisation\Evenement;
 use models\organisation\Organiser;
 use models\organisation\Periode_Evenement;
+use models\organisation\Etat;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 
@@ -29,14 +30,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $evenement_id = $db->lastInsertId();
 
     $organiser = new Organiser(null, $_SESSION['id_utilisateur'], $evenement_id, date('Y-m-d H:i:s'));
-    $organiser->save();
+    $db = $organiser->save();
 
     $periode_evenement = new Periode_Evenement(null, $evenement_id, $_POST['date_debut'], $_POST['date_fin']);
-    $periode_evenement->save();
+    $db = $periode_evenement->save();
+
+    if ($_SESSION['est_Admin'] == true) {
+        $etat = new Etat(null, $evenement_id, 0, 1); //pre approuvé si admin
+    } else {
+        $etat = new Etat(null, $evenement_id, 0, 0);
+    }
+    $db = $etat->save();
 
     header('Location: /event/show?id=' . $evenement_id);
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    echo $twig->render("event/create.twig", ['is_session' => isset($_SESSION['id_utilisateur'])]);
+    echo $twig->render("event/create.twig", ['is_session' => isset($_SESSION['id_utilisateur']), 'is_admin' => $_SESSION['est_Admin']]);
 } else {
     http_response_code(405);
     exit;
