@@ -34,4 +34,24 @@ class event_tools
         }
         return $eventsAll;
     }
+
+    public static function retirerArchive($events)
+    {
+        foreach ($events as $key => $event) {
+            if ($event['est_archive']) {
+                unset($events[$key]);
+            }
+        }
+        return $events;
+    }
+
+    public static function retirerNonApprouve($events)
+    {
+        foreach ($events as $key => $event) {
+            if ($event['est_approuve'] == false) {
+                unset($events[$key]);
+            }
+        }
+        return $events;
+    }
 }
