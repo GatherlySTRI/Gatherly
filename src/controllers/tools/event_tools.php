@@ -25,7 +25,7 @@ class event_tools
             foreach ($periodes as $periode) {
                 foreach ($etats as $etat) {
 
-                    if ($periode['id_evenement_periode'] === $event['id_evenement'] && $etat['id_evenement'] === $event['id_evenement'] || !empty($etat['id_evenement'])) {
+                    if ($periode['id_evenement_periode'] === $event['id_evenement'] && $etat['id_evenement'] === $event['id_evenement']) {
                         array_push($eventsAll, array_merge($event, array_merge($periode, $etat)));
                         break (2);
                     }
