@@ -1,13 +1,16 @@
 <?php
 
-namespace controllers\tools\account_tools;
+namespace tools;
 
-function sameHash($hash1, $hash2)
+class AccountTools
 {
-    return password_verify($hash1, $hash2);
-}
+    public static function sameHash($hash1, $hash2)
+    {
+        return password_verify($hash1, $hash2);
+    }
 
-function hashPassword($password)
-{
-    return password_hash($password, PASSWORD_DEFAULT);
+    public static function hashPassword($password)
+    {
+        return password_hash($password, PASSWORD_DEFAULT);
+    }
 }

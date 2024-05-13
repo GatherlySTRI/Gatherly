@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         session_destroy();
         session_start();
         $_SESSION['id_utilisateur'] = $utilisateur->get_id_utilisateur();
+        $_SESSION['est_Admin'] = $utilisateur->get_est_admin();
         $personne = new Personne();
         $personne->find(null, $utilisateur->get_id_personne_utilisateur());
         $_SESSION['prenom'] = $personne->get_prenom_personne();
