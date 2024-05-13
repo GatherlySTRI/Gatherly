@@ -13,5 +13,6 @@ $twig = new Environment($loader);
 
 $events = event_tools::getAllEvents();
 
+krsort($events); //mets les events les plus récents en premier
 
 echo $twig->render('home.twig', ['events' => $events, 'is_session' => isset($_SESSION['id_utilisateur'])]);
