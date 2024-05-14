@@ -149,7 +149,7 @@ try {
     // Création d'achat de billets
     $cpt = 1;
     for ($i = 1; $i <= 4; $i++) {
-        $currentDateTime = date("d-m-Y H:i:s"); // Format : DD-MM-YYYY HH:MM:SS // WARNING: CETTE LIGNE NE FONCTIONNE PAS SUR LE VPS MAIS FONCTIONNE EN LOCAL
+        $currentDateTime = date("Y-m-d H:i:s"); // Format : DD-MM-YYYY HH:MM:SS // WARNING: CETTE LIGNE NE FONCTIONNE PAS SUR LE VPS MAIS FONCTIONNE EN LOCAL
         $acheter = new Acheter(null, $currentDateTime, $i, $cpt);
         $acheter->save($db);
         $cpt++;
@@ -158,15 +158,31 @@ try {
     // Création d'événements
     $evenement1 = new Evenement(null, "Tournoi de rugby", "Un tournoi de rugby passionnant avec les meilleures équipes", "toucher", "15", "Tournoi");
     $evenement1->save($db);
+    $etat1 = new Etat(null, $db->lastInsertId(), "false", "true");
+    $etat1->save($db);
+    $statuer1 = new Statuer(null, $db->lastInsertId(), 1, date("Y-m-d"));
+    $statuer1->save($db);
 
     $evenement2 = new Evenement(null, "Match de charité", "Un match de charité pour soutenir une bonne cause", "toucher", "7", "Match");
     $evenement2->save($db);
+    $etat2 = new Etat(null, $db->lastInsertId(), "false", "true");
+    $etat2->save($db);
+    $statuer2 = new Statuer(null, $db->lastInsertId(), 1, date("Y-m-d"));
+    $statuer2->save($db);
 
     $evenement3 = new Evenement(null, "Entraînement ouvert", "Venez voir comment les professionnels s'entraînent", "toucher", "15", "Match");
     $evenement3->save($db);
+    $etat3 = new Etat(null, $db->lastInsertId(), "false", "true");
+    $etat3->save($db);
+    $statuer3 = new Statuer(null, $db->lastInsertId(), 1, date("Y-m-d"));
+    $statuer3->save($db);
 
     $evenement4 = new Evenement(null, "Championnat de contact", "Un match de rugby de contact intense", "contact", "15", "Championnat");
     $evenement4->save($db);
+    $etat4 = new Etat(null, $db->lastInsertId(), "false", "true");
+    $etat4->save($db);
+    $statuer4 = new Statuer(null, $db->lastInsertId(), 1, date("Y-m-d"));
+    $statuer4->save($db);
 
     // Création d'organisateurs
     $cpt = 1;
