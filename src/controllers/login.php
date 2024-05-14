@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $utilisateur = new Utilisateur();
     $utilisateur->find_by_column(null, 'mail', $_POST['mail']);
     if ($utilisateur->get_id_utilisateur() == null || $utilisateur->get_mdp() != md5($_POST['mdp'])) {
-        echo $twig->render("login.twig", ['error' => 'Email ou mot de passe incorrect', 'is_session' => isset($_SESSION['id_utilisateur'])]);
+        echo $twig->render("login.twig", ['error' => 'Email ou mot de passe incorrect', 'session' => $_SESSION]);
         exit;
     } elseif ($utilisateur->get_id_utilisateur() != null && $utilisateur->get_mdp() == md5($_POST['mdp'])) {
         session_destroy();
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    echo $twig->render("login.twig", ['is_session' => isset($_SESSION['id_utilisateur'])]);
+    echo $twig->render("login.twig", ['session' => $_SESSION]);
 } else {
     http_response_code(405);
     exit;

@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Si la requête est de type POST
     //Redirection vers la page de login
     $loader = new FilesystemLoader('src/view');
     $twig = new Environment($loader);
-    echo $twig->render("login.twig", ['register_success' => true, 'is_session' => isset($_SESSION['id_utilisateur']), 'is_admin' => $_SESSION['est_Admin']]);
+    echo $twig->render("login.twig", ['register_success' => true, 'session' => $_SESSION]);
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') { // Si la requête est de type GET
 
     //Chargement de la vue
