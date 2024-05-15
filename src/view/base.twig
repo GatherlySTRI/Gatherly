@@ -47,12 +47,12 @@
           <li class="md:px-4 md:py-2 hover:text-gray-200"><a href="/nous">Qui sommes-nous ?</a></li> <!-- Lien mis à jour vers la page /nous -->
         </ul>
       </div>
-      {% if is_session %} <!-- Ajout de la condition pour afficher le bouton de déconnexion -->    
+      {% if session.id_utilisateur is defined %} <!-- Ajout de la condition pour afficher le bouton de déconnexion -->    
       
           <div class="order-2 md:order-3">          
               <div class="relative text-gray-600 md:order-1">                  
                   <button onclick="toggleDropdownAccount()" class="dropdown-button focus:outline-none">
-                  {% if is_admin %} <!-- Ajout de la condition pour afficher le bouton de gestion des évènements -->
+                  {% if session.est_Admin %} <!-- Ajout de la condition pour afficher le bouton de gestion des évènements -->
                       <img src="/public/images/account_admin.svg" class="h-6 w-6 md:h-10 md:w-10" alt="Paramètres">
                   {% else %}
                       <img src="/public/images/account.svg" class="h-6 w-6 md:h-10 md:w-10" alt="Paramètres">
