@@ -51,7 +51,7 @@ try {
 
     // Instanciation connecteur BDD
 
-    
+
     // /!\ ATTENTION /!\ CETTE LIGNE VA SUPPRIMER LA BASE DE DONNEES ET LA RECREER. /!\ ATTENTION /!\
     $db = new \PDO("pgsql:host=$db_host;port=$db_port;dbname=postgres", $db_user, $db_password);
     $db->exec('DROP DATABASE IF EXISTS gatherly_db;');
@@ -69,7 +69,7 @@ try {
     $utilisateur->save($db);
 
     // Données de test personne
-    $names = ["Pierre", "Paul", "Jacques", "Marie", "Sophie", "Nicolas", "Julien", "Jérôme","William", "Luka", "Alexy", "Alexei", "Py", "Hadopy", "Tommy", "Nathalie", "Céline", "Claire", "Éric", "Olivier", "Laurent", "Benoît", "Christophe", "Patrice", "Vincent", "Denis", "Marc", "Alexandre", "Antoine", "Philippe", "François", "Jean", "Luc", "Guy", "Hervé", "Bruno", "Alain", "Thierry", "Sébastien", "Christian", "Gérard","John", "Jane", "Sam", "Sara", "Michael", "Michelle", "David", "Danielle", "Robert", "Rebecca", "Daniel", "Diana", "James", "Jennifer", "Brian", "Brianna", "Kevin", "Kim", "Richard", "Rachel", "Paul", "Patricia", "Mark", "Megan", "Joseph", "Jessica", "Matthew", "Melissa", "Andrew", "Amanda", "Joshua", "Jacqueline", "Christopher", "Christine", "Nicholas", "Nicole"];
+    $names = ["Pierre", "Paul", "Jacques", "Marie", "Sophie", "Nicolas", "Julien", "Jérôme", "William", "Luka", "Alexy", "Alexei", "Py", "Hadopy", "Tommy", "Nathalie", "Céline", "Claire", "Éric", "Olivier", "Laurent", "Benoît", "Christophe", "Patrice", "Vincent", "Denis", "Marc", "Alexandre", "Antoine", "Philippe", "François", "Jean", "Luc", "Guy", "Hervé", "Bruno", "Alain", "Thierry", "Sébastien", "Christian", "Gérard", "John", "Jane", "Sam", "Sara", "Michael", "Michelle", "David", "Danielle", "Robert", "Rebecca", "Daniel", "Diana", "James", "Jennifer", "Brian", "Brianna", "Kevin", "Kim", "Richard", "Rachel", "Paul", "Patricia", "Mark", "Megan", "Joseph", "Jessica", "Matthew", "Melissa", "Andrew", "Amanda", "Joshua", "Jacqueline", "Christopher", "Christine", "Nicholas", "Nicole"];
     $surnames = ["Martin", "Bernard", "Dubois", "Thomas", "Robert", "Petit", "Lafeve", "Juillet", "Oupiquant", "Boin-Rollex", "Ranha", "Sadouguy", "Collier", "Durand", "Leroy", "Moreau", "Simon", "Laurent", "Lefevre", "Michel", "Garcia", "David", "Bertrand", "Roux", "Vincent", "Fournier", "Morel", "Girard", "Andre", "Lefevre", "Mercier", "Dupont", "Lambert", "Bonnet", "Francois", "Martinez", "Legrand", "Garnier", "Faure", "Rousseau", "Blanc", "Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson", "Thomas", "Jackson", "White", "Harris", "Martin", "Thompson", "Garcia", "Martinez", "Robinson", "Clark", "Rodriguez", "Lewis", "Lee", "Walker", "Hall", "Allen", "Young", "Hernandez", "King", "Wright", "Lopez", "Hill", "Scott", "Green", "Adams"];
     $sexes = ['M', 'F', 'A'];
     $birthDate = date("Y-m-d", strtotime("-" . rand(20, 70) . " years"));
@@ -96,18 +96,18 @@ try {
     }
 
     // Création d'arbitres
-    for ($i=0; $i <5; $i++) {
-        $arbitre = new Arbitre(null, $i+1);
+    for ($i = 0; $i < 5; $i++) {
+        $arbitre = new Arbitre(null, $i + 1);
         $arbitre->save($db);
     }
 
     // Création d'utilisateurs
-    for ($i=6; $i <=20; $i++) {
+    for ($i = 6; $i <= 20; $i++) {
         $email = strtolower($names[$i]) . rand(1, 100) . "@" . $domains[array_rand($domains)];
         $phone = (rand(0, 1) == 0) ? "123456" . str_pad($i, 4, "0", STR_PAD_LEFT) : null;
         $password = md5($passwords[array_rand($passwords)]);
 
-        if ($i == 9 || $i ==10 || $i == 11){
+        if ($i == 9 || $i == 10 || $i == 11) {
             $utilisateur = new Utilisateur(null, $i, $email, $phone, $password, "true");
             $utilisateur->save($db);
         } else {
@@ -117,7 +117,7 @@ try {
     }
 
     // Création de membres d'équipes joueurs
-    for ($i = 21; $i <= 44 ; $i++){ 
+    for ($i = 21; $i <= 44; $i++) {
         $role = $roles[0]; // Tous les membres sont des joueurs
         $poste = $postes[array_rand($postes)];
 
@@ -127,7 +127,7 @@ try {
 
     // Création de membres d'équipes entraineurs
 
-    for ($i = 45; $i <= 46 ; $i++){ 
+    for ($i = 45; $i <= 46; $i++) {
         $role = $roles[1]; // Tous les membres sont des entraineurs
         $poste = null;
 
@@ -147,9 +147,9 @@ try {
     $billet->save($db);
 
     // Création d'achat de billets
-    $cpt=1;
-    for ($i = 1; $i <=4; $i++) {
-        $currentDateTime = date("d-m-Y H:i:s"); // Format : DD-MM-YYYY HH:MM:SS
+    $cpt = 1;
+    for ($i = 1; $i <= 4; $i++) {
+        $currentDateTime = date("Y-m-d H:i:s"); // Format : DD-MM-YYYY HH:MM:SS // WARNING: CETTE LIGNE NE FONCTIONNE PAS SUR LE VPS MAIS FONCTIONNE EN LOCAL
         $acheter = new Acheter(null, $currentDateTime, $i, $cpt);
         $acheter->save($db);
         $cpt++;
@@ -158,18 +158,34 @@ try {
     // Création d'événements
     $evenement1 = new Evenement(null, "Tournoi de rugby", "Un tournoi de rugby passionnant avec les meilleures équipes", "toucher", "15", "Tournoi");
     $evenement1->save($db);
+    $etat1 = new Etat(null, $db->lastInsertId(), "false", "true");
+    $etat1->save($db);
+    $statuer1 = new Statuer(null, $db->lastInsertId(), 1, date("Y-m-d"));
+    $statuer1->save($db);
 
     $evenement2 = new Evenement(null, "Match de charité", "Un match de charité pour soutenir une bonne cause", "toucher", "7", "Match");
     $evenement2->save($db);
+    $etat2 = new Etat(null, $db->lastInsertId(), "false", "true");
+    $etat2->save($db);
+    $statuer2 = new Statuer(null, $db->lastInsertId(), 1, date("Y-m-d"));
+    $statuer2->save($db);
 
     $evenement3 = new Evenement(null, "Entraînement ouvert", "Venez voir comment les professionnels s'entraînent", "toucher", "15", "Match");
     $evenement3->save($db);
+    $etat3 = new Etat(null, $db->lastInsertId(), "false", "true");
+    $etat3->save($db);
+    $statuer3 = new Statuer(null, $db->lastInsertId(), 1, date("Y-m-d"));
+    $statuer3->save($db);
 
     $evenement4 = new Evenement(null, "Championnat de contact", "Un match de rugby de contact intense", "contact", "15", "Championnat");
     $evenement4->save($db);
- 
+    $etat4 = new Etat(null, $db->lastInsertId(), "false", "true");
+    $etat4->save($db);
+    $statuer4 = new Statuer(null, $db->lastInsertId(), 1, date("Y-m-d"));
+    $statuer4->save($db);
+
     // Création d'organisateurs
-    $cpt=1;
+    $cpt = 1;
     for ($i = 5; $i <= 8; $i++) {
         // Génération aléatoire de dates
         $randomTimeStamp = rand(strtotime("2020-01-01"), strtotime("2023-12-31")); // Générer un timestamp aléatoire entre deux dates
@@ -182,12 +198,12 @@ try {
     }
 
     // Création de spectateurs
-    $cpt=1;
+    $cpt = 1;
     for ($i = 9; $i <= 12; $i++) {
 
         // Génération aléatoire de dates
-        $randomTimeStamp = rand(strtotime("2020-01-01"), strtotime("2023-12-31")); 
-        $Date = date("Y-m-d", $randomTimeStamp); 
+        $randomTimeStamp = rand(strtotime("2020-01-01"), strtotime("2023-12-31"));
+        $Date = date("Y-m-d", $randomTimeStamp);
 
         // Requête date de création de l'événement
         $query = $db->prepare("SELECT date_creation FROM organiser WHERE id_organiser = :id_organiser");
@@ -214,7 +230,7 @@ try {
     $participer->save($db);
 
     // Création de périodes d'événements
-    for ($i=1; $i <=4; $i++) {
+    for ($i = 1; $i <= 4; $i++) {
 
         // Requête pour récupérer la date de création de l'événement
         // $query = $db->prepare("SELECT date_creation FROM organiser WHERE id_organiser = :id_organiser");
@@ -230,9 +246,9 @@ try {
 
         $organiser = new Organiser();
         $organiser->find_by_column(null, 'id_evenement_organise', $i);
-        
-        $randomTimeStamp = rand(strtotime($eventCreationDate), strtotime(date("Y-m-d"))); 
-        $DateDebutEvenement = date("Y-m-d", $randomTimeStamp); 
+
+        $randomTimeStamp = rand(strtotime($eventCreationDate), strtotime(date("Y-m-d")));
+        $DateDebutEvenement = date("Y-m-d", $randomTimeStamp);
 
         while ($DateDebutEvenement < $eventCreationDate) {
             $randomTimeStamp = rand(strtotime("2020-01-01"), strtotime(date("Y-m-d")));
@@ -328,9 +344,6 @@ try {
     $arbitrer->save($db);
 
     echo "TEST REUSSI\n";
-
 } catch (Exception $e) {
     echo "TEST FAILED: $e\n";
 }
-
-?>

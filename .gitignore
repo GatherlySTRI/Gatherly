@@ -1,12 +1,9 @@
-<<<<<<< HEAD
 /node_modules
 /.vscode
 /vendor
 set_env.sh
-=======
 /node_modules
 /.vscode
 /vendor
 /public/output.css
 set_env.sh
->>>>>>> 4a86d8c3b204b733ff24b0c188b427ebfa31684d

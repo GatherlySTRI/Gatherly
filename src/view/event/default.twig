@@ -1,0 +1,21 @@
+{% extends "base.twig" %}
+
+{% block body %}
+
+{% if events is empty %}
+
+<div class="flex justify-center items-center h-screen">
+    <div class="text-center">
+        <h1 class="text-2xl font-semibold text-gray-800">Aucun évènement trouvé</h1>
+        <p class="text-gray-500">Il n'y a aucun évènement de prévu.</p>
+    </div>
+</div>
+    
+    {% else %}
+    <div class="flex flex-wrap justify-center gap-4 p-1">
+
+    {% include 'event/showUnit.twig'  %}
+
+</div>
+{% endif %}
+{% endblock %}

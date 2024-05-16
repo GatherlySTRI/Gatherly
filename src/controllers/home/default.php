@@ -1,13 +1,21 @@
 <?php
 require_once 'vendor/autoload.php';
 
-session_start();
 
 use models\humain\Personne;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 
+use tools\event_tools;
+
 $loader = new FilesystemLoader('src/view');
 $twig = new Environment($loader);
 
-echo $twig->render('home.twig', ['is_session' => isset($_SESSION['id_utilisateur'])]);
+$events = event_tools::getAllEvents();
+
+krsort($events); //mets les events les plus récents en premier
+
+$events = event_tools::retirerArchive($events);
+$events = event_tools::retirerNonApprouve($events);
+
+echo $twig->render('home.twig', ['events' => $events, 'session' => $_SESSION]);
