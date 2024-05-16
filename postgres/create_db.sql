@@ -55,7 +55,8 @@ CREATE TABLE Evenement (
     description_evenement VARCHAR(1000),
     type_rugby Type_Rugby,
     variante_rugby Variante_Rugby,
-    categorie_evenement VARCHAR(255)
+    categorie_evenement VARCHAR(255),
+    id_etat INT NOT NULL REFERENCES Etat(id_etat) ON DELETE CASCADE,
 );
 
 CREATE TABLE Organiser(
@@ -88,7 +89,6 @@ CREATE TABLE Periode_Evenement(
 
 CREATE TABLE Etat(
     id_etat SERIAL PRIMARY KEY,
-    id_evenement INT NOT NULL REFERENCES Evenement(id_evenement) ON DELETE CASCADE,
     est_archive BOOLEAN,
     est_approuve BOOLEAN
 );
