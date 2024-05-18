@@ -90,6 +90,14 @@ CREATE TABLE Periode_Evenement(
     date_fin DATE
 );
 
+CREATE TABLE Se_Derouler(
+   id_evenement INT,
+   id_periode_evenement INT,
+   PRIMARY KEY(id_evenement, id_periode_evenement),
+   FOREIGN KEY(id_evenement) REFERENCES Evenement(id_evenement),
+   FOREIGN KEY(id_periode_evenement) REFERENCES Periode_evenement(id_periode_evenement)
+);
+
 CREATE TABLE Etat(
     id_etat SERIAL PRIMARY KEY,
     est_archive BOOLEAN,
