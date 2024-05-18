@@ -13,7 +13,7 @@ if (empty($_GET['slug'])) // S'il n'y pas de slug.
     $filePath = "src/controllers/" . implode("/", $slug) . ".php";
     if (file_exists($filePath)) { //Si la page n'existe pas --> 404
         require_once($filePath);
-    } elseif (file_exists("src/controllers/" . $slug[0] . "/default.php")) {
+    } elseif (file_exists("src/controllers/" . implode("/", $slug) . "/default.php")) {
         require_once("src/controllers/" . $slug[0] . "/default.php");
     } else {
         require_once("src/controllers/404.php");
