@@ -7,4 +7,4 @@ use Twig\Environment;
 $loader = new FilesystemLoader('src/view');
 $twig = new Environment($loader);
 
-echo $twig->render("404.twig");
+echo $twig->render("404.twig", ['session' => $_SESSION]);
