@@ -137,7 +137,7 @@ CREATE TABLE Couvrir(
     id_evenement_couvrir INT NOT NULL REFERENCES Evenement(id_evenement) ON DELETE CASCADE
 );
 
-CREATE TABLE Phase_Arbre(
+CREATE TABLE Arbre(
     id_arbre SERIAL PRIMARY KEY,
     id_evenement_arbre INT NOT NULL REFERENCES Evenement(id_evenement) ON DELETE CASCADE,
     date_creation_arbre DATE
@@ -171,31 +171,7 @@ CREATE TABLE Aller_Retour(
     id_aller_retour_phase_A_R_ INT NOT NULL REFERENCES Phase_A_R(id_phase_a_r) ON DELETE CASCADE
 );
 
-//A débattre
-CREATE TABLE Se_deplacer(
-   id_match_rugby,
-   ID_adresse_API INT,
-   date_retour DATE NOT NULL,
-   ID_A_R INT NOT NULL,
-   PRIMARY KEY(ID_Match, ID_adresse_API),
-   UNIQUE(ID_A_R),
-   FOREIGN KEY(ID_Match, ID_adresse_API) REFERENCES MatchRubgy(ID_Match, ID_adresse_API),
-   FOREIGN KEY(ID_A_R) REFERENCES Aller_Retour(ID_A_R)
-);
-
-//A débattre
-CREATE TABLE Recevoir(
-   ID_Match INT,
-   ID_adresse_API VARCHAR(50),
-   date_aller DATE NOT NULL,
-   ID_A_R INT NOT NULL,
-   PRIMARY KEY(ID_Match, ID_adresse_API),
-   UNIQUE(ID_A_R),
-   FOREIGN KEY(ID_Match, ID_adresse_API) REFERENCES MatchRubgy(ID_Match, ID_adresse_API),
-   FOREIGN KEY(ID_A_R) REFERENCES Aller_Retour(ID_A_R)
-);
-
-CREATE TYPE Type_Phase_Arbre AS ENUM ('seizieme','huitieme', 'quart', 'demi', 'finale');
+CREATE TYPE Type_Etape_Arbre AS ENUM ('seizieme','huitieme', 'quart', 'demi', 'finale');
 
 CREATE TABLE Etape_Arbre(
     id_etape_arbre SERIAL PRIMARY KEY,
@@ -219,7 +195,7 @@ CREATE TABLE Poule(
 CREATE TABLE Disputer_Match_Poule(
     id_poule_contient SERIAL PRIMARY KEY,
     id_poule_poule_contient INT NOT NULL REFERENCES Poule(id_poule) ON DELETE CASCADE,
-    id_match_rugby_poule_contient INT NOT NULL REFERENCES Match_Rugby(id_match_rugby) ON DELETE CASCADE
+    FOREIGN KEY(id_match_rugby, id_adresse_API) REFERENCES MatchRubgy(id_match_rugby, id_adresse_API) ON DELETE CASCADE
 );
 
 CREATE TABLE Acceder(
@@ -247,24 +223,11 @@ CREATE TABLE Recompense(
     id_equipe_recompense INT NOT NULL REFERENCES Equipe(id_equipe) ON DELETE CASCADE
 );
 
-CREATE TABLE Recevoir_Recompense(
-    id_recevoir_recompense SERIAL PRIMARY KEY,
-    id_recompense_recevoir_recompense INT NOT NULL REFERENCES Recompense(id_recompense) ON DELETE CASCADE,
-    id_equipe_recevoir_recompense INT NOT NULL REFERENCES Equipe(id_equipe) ON DELETE CASCADE
-);
-
-CREATE TABLE Attribuer_Recompense(
-    id_attribuer_recompense SERIAL PRIMARY KEY,
-    id_evenement_attribuer_recompense INT NOT NULL REFERENCES Evenement(id_evenement) ON DELETE CASCADE,
-    id_recompense_attribuer_recompense INT NOT NULL REFERENCES Recompense(id_recompense) ON DELETE CASCADE
-);
-
 CREATE TABLE Jouer(
     id_jouer SERIAL PRIMARY KEY,
     FOREIGN KEY (id_match_rugby_jouer, id_adresse_API) INT NOT NULL REFERENCES Match_Rugby(id_match_rugby, id_adresse_API) ON DELETE CASCADE,
     id_equipe_jouer INT NOT NULL REFERENCES Equipe(id_equipe) ON DELETE CASCADE,
     score INT NOT NULL,
-    nb_essais INT
 );
 
 CREATE TABLE Disputer(
