@@ -18,4 +18,4 @@ krsort($events); //mets les events les plus récents en premier
 $events = event_tools::retirerArchive($events);
 $events = event_tools::retirerNonApprouve($events);
 
-echo $twig->render('home.twig', ['events' => $events, 'is_session' => isset($_SESSION['id_utilisateur']), 'is_admin' => $_SESSION['est_Admin']]);
+echo $twig->render('home.twig', ['events' => $events, 'session' => $_SESSION]);

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gatherly</title>
     <link href="/public/output.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/public/images/logo.ico">
 </head>
 <script>
   function toggleDropdownAccount() {
@@ -30,7 +31,7 @@
     <div class="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
       <!-- Logo -->
       <div class="text-yellow-500 md:order-1">
-        <p>Logo</p>
+        <img src="/public/images/logo.png" class="h-10 w-10 md:h-16 md:w-16" alt="Logo Gatherly">
       </div>
       <div class="text-gray-300 order-3 w-full md:w-auto md:order-2">
         <ul class="flex font-semibold justify-between">
@@ -42,17 +43,20 @@
               <div id="dropdown_event" class="absolute mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10" style="display: none;">
                   <a href="/event/create" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Créer un évènement</a>
                   <a href="/event" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Voir tous les évènements</a>
+                  {% if session.est_Admin %}
+                      <a href="/event/manage" class="block px-4 py-2 text-sm text-red-700 hover:bg-indigo-600 hover:text-white">Gérer les évènements</a>
+                  {% endif %}
               </div>
           </li>
           <li class="md:px-4 md:py-2 hover:text-gray-200"><a href="/nous">Qui sommes-nous ?</a></li> <!-- Lien mis à jour vers la page /nous -->
         </ul>
       </div>
-      {% if is_session %} <!-- Ajout de la condition pour afficher le bouton de déconnexion -->    
+      {% if session.id_utilisateur is defined %} <!-- Ajout de la condition pour afficher le bouton de déconnexion -->    
       
           <div class="order-2 md:order-3">          
               <div class="relative text-gray-600 md:order-1">                  
                   <button onclick="toggleDropdownAccount()" class="dropdown-button focus:outline-none">
-                  {% if is_admin %} <!-- Ajout de la condition pour afficher le bouton de gestion des évènements -->
+                  {% if session.est_Admin %} <!-- Ajout de la condition pour afficher le bouton de gestion des évènements -->
                       <img src="/public/images/account_admin.svg" class="h-6 w-6 md:h-10 md:w-10" alt="Paramètres">
                   {% else %}
                       <img src="/public/images/account.svg" class="h-6 w-6 md:h-10 md:w-10" alt="Paramètres">

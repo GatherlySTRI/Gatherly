@@ -21,4 +21,4 @@ $eventsAll = event_tools::getAllEvents();
 $eventsAll = event_tools::retirerArchive($eventsAll);
 $eventsAll = event_tools::retirerNonApprouve($eventsAll);
 
-echo $twig->render("event/default.twig", ['events' => $eventsAll, 'is_session' => isset($_SESSION['id_utilisateur']), 'is_admin' => $_SESSION['est_Admin']]);
+echo $twig->render("event/default.twig", ['events' => $eventsAll, 'session' => $_SESSION]);

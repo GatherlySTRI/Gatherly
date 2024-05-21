@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     header('Location: /event/show?id=' . $evenement_id);
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    echo $twig->render("event/create.twig", ['is_session' => isset($_SESSION['id_utilisateur']), 'is_admin' => $_SESSION['est_Admin']]);
+    echo $twig->render("event/create.twig", ['session' => $_SESSION]);
 } else {
     http_response_code(405);
     exit;

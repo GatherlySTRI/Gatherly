@@ -61,14 +61,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Si la requête est de type POST
     }
 
     //Hashage du mot de passe
-    $_POST['mdp'] = md5($_POST['mdp']);
+    $_POST['mdp'] = password_hash($_POST['mdp'], PASSWORD_DEFAULT);
 
     // Création de la personne
     $personne->set_nom_personne($_POST['nom']);
     $personne->set_prenom_personne($_POST['prenom']);
     $personne->set_date_naissance($_POST['date_naissance']);
     $personne->set_sexe($_POST['sexe']);
-    $db = $personne->save($db);
+    $personne->save($db);
 
     // Création de l'utilisateur
     $utilisateur->set_id_personne_utilisateur($db->lastInsertId());
@@ -76,12 +76,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Si la requête est de type POST
     $utilisateur->set_telephone($_POST['telephone']);
     $utilisateur->set_mdp($_POST['mdp']);
     $utilisateur->set_est_admin('false');
-    $db = $utilisateur->save($db);
+    $utilisateur->save($db);
 
     //Redirection vers la page de login
     $loader = new FilesystemLoader('src/view');
     $twig = new Environment($loader);
-    echo $twig->render("login.twig", ['register_success' => true, 'is_session' => isset($_SESSION['id_utilisateur']), 'is_admin' => $_SESSION['est_Admin']]);
+    echo $twig->render("login.twig", ['register_success' => true, 'session' => $_SESSION]);
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') { // Si la requête est de type GET
 
     //Chargement de la vue
