@@ -16,6 +16,11 @@ use Twig\Environment;
 $loader = new FilesystemLoader('src/view');
 $twig = new Environment($loader);
 
+if ($_SESSION['est_Admin'] == false) {
+    require_once('src/controllers/404.php');
+    exit();
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
