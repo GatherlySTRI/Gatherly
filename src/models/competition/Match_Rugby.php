@@ -9,13 +9,15 @@ class Match_Rugby extends BaseEntity {
     protected $id_adresse_API;
     protected $date_match_rugby;
     protected $heure_match_rugby;
+    protected $id_evenement;
 
     // Constructeur
-    public function __construct($id_match_rugby=null, $id_adresse_API=null, $date_match_rugby=null, $heure_match_rugby=null) {
+    public function __construct($id_match_rugby=null, $id_adresse_API=null, $date_match_rugby=null, $heure_match_rugby=null, $id_evenement=null) {
         $this->id_match_rugby = $id_match_rugby;
         $this->id_adresse_API = $id_adresse_API;
         $this->date_match_rugby = $date_match_rugby;
         $this->heure_match_rugby = $heure_match_rugby;
+        $this->id_evenement = $id_evenement;
     }
 
     // Getters
@@ -35,6 +37,10 @@ class Match_Rugby extends BaseEntity {
         return $this->heure_match_rugby;
     }
 
+    public function get_id_evenement() {
+        return $this->id_evenement;
+    }
+
     // Setters
     public function set_id_match_rugby($id_match_rugby) {
         $this->id_match_rugby = $id_match_rugby;
@@ -50,5 +56,9 @@ class Match_Rugby extends BaseEntity {
 
     public function set_heure_match_rugby($heure_match_rugby) {
         $this->heure_match_rugby = $heure_match_rugby;
+    }
+
+    public function set_id_evenement($id_evenement) {
+        $this->id_evenement = $id_evenement;
     }
 }

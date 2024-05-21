@@ -41,3 +41,9 @@ function verify_exist_event($id_evenement){
     $evenement->find(null, $id_evenement);
     return ($evenement->get_id_evenement() != null); // Vérification que l'évenement existe
 }
+
+function get_type_evenement($id_evenement){
+    $evenement = new Evenement();
+    $evenement->find(null, $id_evenement);
+    return $evenement->get_categorie_evenement(); // Récupération du type de l'évènement
+}

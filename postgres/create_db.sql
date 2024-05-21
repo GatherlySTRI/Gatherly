@@ -148,9 +148,10 @@ CREATE TABLE Phase_Poule(
 
 CREATE TABLE Match_Rugby(
     id_match_rugby SERIAL PRIMARY KEY,
-    id_adresse_API INT,
+    id_adresse_API VARCHAR(255),
     date_match_rugby DATE,
-    heure_match_rugby TIME
+    heure_match_rugby TIME,
+    id_evenement INT REFERENCES Evenement(id_evenement) ON DELETE CASCADE
 );
 
 CREATE TABLE Aller_Retour(
@@ -160,17 +161,17 @@ CREATE TABLE Aller_Retour(
     id_aller_retour_phase_A_R_ INT NOT NULL REFERENCES Phase_A_R(id_phase_a_r) ON DELETE CASCADE
 );
 
-CREATE TYPE Type_Phase_Arbre AS ENUM ('seizieme','huitieme', 'quart', 'demi', 'finale');
+CREATE TYPE Type_Etape_Arbre AS ENUM ('seizieme','huitieme', 'quart', 'demi', 'finale');
 
-CREATE TABLE Phase_Arbre(
-    id_phase_arbre SERIAL PRIMARY KEY,
-    id_arbre_phase_arbre INT NOT NULL REFERENCES Arbre(id_arbre) ON DELETE CASCADE,
-    etape Type_Phase_Arbre
+CREATE TABLE Etape_Arbre(
+    id_etape_Arbre SERIAL PRIMARY KEY,
+    id_arbre_etape_arbre INT NOT NULL REFERENCES Arbre(id_arbre) ON DELETE CASCADE,
+    etape Type_Etape_Arbre
 );
 
 CREATE TABLE Etape_Contient(
     id_etape_contient SERIAL PRIMARY KEY,
-    id_phase_arbre_etape INT NOT NULL REFERENCES Phase_Arbre(id_phase_arbre) ON DELETE CASCADE,
+    id_etape_arbre_etape INT NOT NULL REFERENCES Etape_Arbre(id_etape_arbre) ON DELETE CASCADE,
     id_match_rugby_etape INT NOT NULL REFERENCES Match_Rugby(id_match_rugby) ON DELETE CASCADE
 );
 
@@ -195,7 +196,8 @@ CREATE TABLE Acceder(
 
 CREATE TABLE Equipe(
     id_equipe SERIAL PRIMARY KEY,
-    nom_equipe VARCHAR(255)
+    nom_equipe VARCHAR(255),
+    id_utilisateur_equipe INT NOT NULL REFERENCES Utilisateur(id_utilisateur) ON DELETE CASCADE
 );
 
 CREATE TABLE Composer(

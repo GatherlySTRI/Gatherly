@@ -1,0 +1,21 @@
+{% set i = 0 %}
+{% for match in matchs|slice(0, matchs|length) %}
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden max-w-md mx-auto mr-2 ml-2">
+        <div class="px-4 pt-4 pb-2 bg-gray-100 flex justify-between items-center">
+            <div class="text-gray-900 font-semibold text-lg mb-2">Match de {{ event.nom_evenement }}</div>
+        </div>
+        <div class="h-32 bg-gray-200"></div>
+        <div class="px-4 py-2">
+            <p class="text-gray-500 text-sm mb-2">{{ event.date_debut|date('d/m/Y H:i') }}</p>
+            {% if event.date_debut != event.date_fin %}
+                <p class="text-gray-500 text-sm mb-2">{{ event.date_fin|date('d/m/Y H:i') }}</p>
+            {% endif %}
+            <div class="flex justify-between items-center text-gray-700">
+                <div class="flex items-center">
+                    <span class="font-bold">{{equipes[i]['equipe1']}} - {{equipes[i]['equipe2']}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% set i = i + 1 %}
+{% endfor %}

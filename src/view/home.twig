@@ -1,15 +1,14 @@
 {% extends 'base.twig' %}
 
 {% block body %}
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.0/dist/tailwind.min.css" rel="stylesheet">
+{# <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3.0/dist/tailwind.min.css" rel="stylesheet"> #}
 
-<div class="flex flex-col h-screen ">
+<div class="flex flex-col">
   <div class="bg-cover bg-center flex items-center justify-center" style="height:40vh; background-image: url('/public/images/background.jpg');">
-    <div class="flex items-center justify-center min-h-screen bg-opacity-50 p-8 rounded-lg">
+    <div class="flex items-center justify-center bg-opacity-50 p-8 rounded-lg">
       <div class="flex flex-col items-center justify-center w-full">
-        <div class="flex items-center justify-center bg-white rounded p-4" style="width: 70%;">
-          <h1 class="text-xl font-bold text-gray-800">Créer un évènement sur Gatherly</h1>
-          <p class="text-gray-600">Un match, un tournoi, un championnat ? Soyer présent sur Gatherly, la référence de la gestion d'évènement rugbystique.</p>
+        <div class="flex items-center justify-center bg-white rounded p-4">
+          <p class="text-gray-600 mr-2 ml-2">Un match, un tournoi, un championnat ? Soyez présent sur Gatherly </p>
           <button onclick="location.href = '/event/create';" class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg flex items-center font-semibold">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -22,17 +21,14 @@
   </div>
   <!--.............................................Evénements nouvellements créés.....................................................................................................................................................................................................................................................................-->
   <div class="flex-grow mb-4">
-    <h1 class="text-3xl font-bold text-black mt-4 ml-4">Evénements nouvellements créés</h1>
+    <h1 class="text-3xl font-bold text-black mt-4 mb-4 mx-auto text-center">Evénements nouvellements créés</h1>
     <div class="flex flex-wrap justify-center gap-4 p-1">
       <!-- Inclure ICI les cards -->
       {% include 'event/showUnit.twig' with {'nbOccurence': 3, 'events': events} %}
     </div>
   </div>
 
-  <div class ="mt-2">
-  </div>
-
-  <div class="mt-5">
+  <div class="mt-3">
     <div class="bg-gray-200 px-10 py-6 flex justify-between items-center w-full">
       <div class="text-center flex-grow">
         <h1 class="text-xl font-bold text-gray-800">Qui sommes-nous ?</h1>
@@ -47,9 +43,5 @@
     </div>
   </div>
 </div>
-
-
-
-
 {% endblock %}
 
