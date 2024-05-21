@@ -156,7 +156,7 @@ try {
     }
 
     // Création d'événements
-    $evenement1 = new Evenement(null, "Tournoi de rugby", "Un tournoi de rugby passionnant avec les meilleures équipes", "toucher", "15", "Tournoi");
+    $evenement1 = new Evenement(null, "Tournoi de rugby", "Un tournoi de rugby passionnant avec les meilleures équipes", "toucher", "15", "Arbre");
     $evenement1->save($db);
     $etat1 = new Etat(null, $db->lastInsertId(), "true", "false");
     $etat1->save($db);
@@ -177,7 +177,7 @@ try {
     $statuer3 = new Statuer(null, $db->lastInsertId(), 1, date("Y-m-d"));
     $statuer3->save($db);
 
-    $evenement4 = new Evenement(null, "Championnat de contact", "Un match de rugby de contact intense", "contact", "15", "Championnat");
+    $evenement4 = new Evenement(null, "Championnat de contact", "Un match de rugby de contact intense", "contact", "15", "A_R");
     $evenement4->save($db);
     $etat4 = new Etat(null, $db->lastInsertId(), "false", "true");
     $etat4->save($db);
@@ -319,7 +319,7 @@ try {
     $acceder = new Acceder(null, 1, 1);
     $acceder->save($db);
 
-    $equipe = new Equipe(null, "EquipeX");
+    $equipe = new Equipe(null, "EquipeX", 1);
     $equipe->save($db);
 
     $composer = new Composer(null, 1, 1);

@@ -50,7 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'is_session' => isset($_SESSION['id_utilisateur']),
         'evenement' => $evenement->getData(),
         'organiser' => $organiser->getData(),
-        'periode_evenement' => $periode_evenement->getData()
+        'periode_evenement' => $periode_evenement->getData(),
+        'session' => $_SESSION
     ]);
 } else {
     http_response_code(405);

@@ -1,0 +1,16 @@
+{% extends 'base.twig' %}
+
+{% block body %}
+<form action="/equipe/create" method="POST" class="max-w-md mx-auto mt-4">
+    <div class="bg-yellow-500 text-white px-2 py-1 rounded-md shadow-lg mb-4">
+        Nouvelle équipe
+    </div>
+    <div class="mb-4">
+        <label for="nom_equipe" class="block text-gray-700 text-sm font-bold mb-2">Nom de l'équipe</label>
+        <input type="text" id="nom_equipe" name="nom_equipe" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    </div>
+    <div class="mb-6">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Créer une équipe</button>
+    </div>
+</form>
+{% endblock %}

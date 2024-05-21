@@ -148,9 +148,10 @@ CREATE TABLE Phase_Poule(
 
 CREATE TABLE Match_Rugby(
     id_match_rugby SERIAL PRIMARY KEY,
-    id_adresse_API INT,
+    id_adresse_API VARCHAR(255),
     date_match_rugby DATE,
-    heure_match_rugby TIME
+    heure_match_rugby TIME,
+    id_evenement INT REFERENCES Evenement(id_evenement) ON DELETE CASCADE
 );
 
 CREATE TABLE Aller_Retour(
@@ -195,7 +196,8 @@ CREATE TABLE Acceder(
 
 CREATE TABLE Equipe(
     id_equipe SERIAL PRIMARY KEY,
-    nom_equipe VARCHAR(255)
+    nom_equipe VARCHAR(255),
+    id_utilisateur_equipe INT NOT NULL REFERENCES Utilisateur(id_utilisateur) ON DELETE CASCADE
 );
 
 CREATE TABLE Composer(
