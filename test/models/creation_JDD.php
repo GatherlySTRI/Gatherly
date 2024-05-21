@@ -24,7 +24,7 @@ use models\competition\Phase_A_R;
 use models\competition\Phase_Poule;
 use models\competition\Match_Rugby;
 use models\competition\Aller_Retour;
-use models\competition\Phase_Arbre;
+use models\competition\Etape_Arbre;
 use models\competition\Etape_Contient;
 use models\competition\Poule;
 use models\competition\Poule_Contient;
@@ -304,8 +304,8 @@ try {
     $aller_retour = new Aller_Retour(null, 1, 2, 1);
     $aller_retour->save($db);
 
-    $phase_arbre = new Phase_Arbre(null, 1, "huitieme");
-    $phase_arbre->save($db);
+    $Etape_Arbre = new Etape_Arbre(null, 1, "huitieme");
+    $Etape_Arbre->save($db);
 
     $etape_contient = new Etape_Contient(null, 1, 3);
     $etape_contient->save($db);
