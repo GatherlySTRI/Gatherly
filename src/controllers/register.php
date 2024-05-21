@@ -60,6 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Si la requête est de type POST
         exit;
     }
 
+    
+
     //Hashage du mot de passe
     $_POST['mdp'] = password_hash($_POST['mdp'], PASSWORD_DEFAULT);
 
@@ -68,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Si la requête est de type POST
     $personne->set_prenom_personne($_POST['prenom']);
     $personne->set_date_naissance($_POST['date_naissance']);
     $personne->set_sexe($_POST['sexe']);
-    $personne->save($db);
+    $db = $personne->save();
 
     // Création de l'utilisateur
     $utilisateur->set_id_personne_utilisateur($db->lastInsertId());
@@ -76,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Si la requête est de type POST
     $utilisateur->set_telephone($_POST['telephone']);
     $utilisateur->set_mdp($_POST['mdp']);
     $utilisateur->set_est_admin('false');
-    $utilisateur->save($db);
+    $utilisateur->save();
 
     //Redirection vers la page de login
     $loader = new FilesystemLoader('src/view');
