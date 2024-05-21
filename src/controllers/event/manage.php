@@ -43,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['idEventDearchive'])) {
         $idEvent = $_POST['idEventDearchive'];
         $etat = new Etat();
+        $etat->find_by_column(null, 'id_evenement', $idEvent);
 
         if ($etat->get_est_approuve()) {
             $etat->set_est_approuve(1);
@@ -50,7 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $etat->set_est_approuve(0);
         }
 
-        $etat->find_by_column(null, 'id_evenement', $idEvent);
         $etat->set_est_archive(0);
         $etat->edit();
     }

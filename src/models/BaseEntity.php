@@ -7,7 +7,7 @@ class BaseEntity
     private $data = [];
 
 
-    public function get_db_connector()
+    public static function get_db_connector()
     { // Instanciation du connecteur de la BDD si il n'est pas présent
         $db_host = getenv('DB_HOST') ?: 'gatherly_db';
         $db_port = getenv('DB_PORT') ?: '5432';
@@ -18,7 +18,7 @@ class BaseEntity
         return $db;
     }
 
-    public function get_class_name()
+    public static function get_class_name()
     {
         $classNameParts = explode('\\', static::class);
         return end($classNameParts);
@@ -103,6 +103,36 @@ class BaseEntity
         }
 
         return $this;
+    }
+
+    public static function find_all_by_column($db = null, $className, $fullClassName, $column_name, $column_value)
+    { // Recherche toutes les lignes correspondantes à la colonne dans la BDD
+        if ($db == null) {
+            $db = BaseEntity::get_db_connector();
+        }
+    
+    
+        $sql = "SELECT * FROM $className WHERE $column_name = :value";
+    
+        $stmt = $db->prepare($sql);
+        $stmt->execute(['value' => $column_value]);
+    
+        $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    
+        $objects = [];
+        if ($results) {
+            foreach ($results as $result) {
+                $object = new $fullClassName;
+                foreach ($result as $key => $value) {
+                    if (property_exists($object, $key)) {
+                        $object->{$key} = $value;
+                    }
+                }
+                $objects[] = $object;
+            }
+        }
+    
+        return $objects;
     }
 
     public function delete($db = null)

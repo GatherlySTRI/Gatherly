@@ -65,7 +65,7 @@ try {
     // Test pour les dev
     $personne = new Personne(null, 'John', 'Doe', '2000-01-01', 'M');
     $personne->save($db);
-    $utilisateur = new Utilisateur(null, 1, "mail@mail.com", "0123456789", md5("12345678"), "true");
+    $utilisateur = new Utilisateur(null, 1, "mail@mail.com", "0123456789", password_hash("12345678", PASSWORD_DEFAULT), "true");
     $utilisateur->save($db);
 
     // Données de test personne
@@ -158,7 +158,7 @@ try {
     // Création d'événements
     $evenement1 = new Evenement(null, "Tournoi de rugby", "Un tournoi de rugby passionnant avec les meilleures équipes", "toucher", "15", "Tournoi");
     $evenement1->save($db);
-    $etat1 = new Etat(null, $db->lastInsertId(), "false", "true");
+    $etat1 = new Etat(null, $db->lastInsertId(), "true", "false");
     $etat1->save($db);
     $statuer1 = new Statuer(null, $db->lastInsertId(), 1, date("Y-m-d"));
     $statuer1->save($db);

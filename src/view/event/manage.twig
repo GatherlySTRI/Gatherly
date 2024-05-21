@@ -16,7 +16,6 @@
             <div class="h-32 bg-gray-200"></div>
             <div class="px-4 py-2">
             <div class="text-gray-900 font-semibold text-lg mb-2">{{ event.nom_evenement }}</div>
-            <p class="text-gray-500 text-sm">Venue</p>
             {% if event.date_debut == event.date_fin %} <!-- Si date est la meme ou pas -->
             <p class="text-gray-500 text-sm mb-2">{{ event.date_debut }}</p>
                 {% else %}
@@ -24,18 +23,20 @@
                 {% endif %}
             <div class="flex justify-between items-center text-gray-700">
                 <div class="flex items-center">
-                <span class="font-bold">{{event.categorie_evenement}}</span>
-                </div>   
+                    <span class="font-bold">{{event.categorie_evenement}}</span>
+                </div>
+            </div>
+            <div class="flex justify-center items-center mt-4"> <!-- Nouvelle div pour les boutons -->
                 {% if event.est_approuve == false %} <!-- Si l'event n'est pas approuvé -->
-                    <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" type="submit" name="idEventApprouve" value="{{ event.id_evenement }}" >Approuver</button>
+                    <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2" type="submit" name="idEventApprouve" value="{{ event.id_evenement }}" >Approuver</button>
                 {% endif %}
                 {% if event.est_archive == true %} <!-- Si l'event est archivé -->
                     <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" type="submit" name="idEventDearchive" value="{{ event.id_evenement }}" >Déarchivez</button>
                 {% endif %}
             </div>
-            </div>
         </div>
-    {% endfor %}
+    </div>
+{% endfor %}
 </form>
 
 {% endblock %}
