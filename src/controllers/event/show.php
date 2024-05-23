@@ -57,8 +57,9 @@ if (!verify_exist_event($id_evenement)) { // Vérification que l'évenement exis
 }
 
 if (!verify_right($id_evenement, $id_utilisateur)) { // Vérification que l'évènement appartient bien à l'utilisateur ou si l'utilisateur est admin
-    http_response_code(403);
-    exit;
+    // CA FAIT PLUS RIEN
+    //http_response_code(403);
+    //exit;
 }
 
 $loader = new FilesystemLoader('src/view');
