@@ -115,6 +115,7 @@ try {
             $utilisateur->save($db);
         }
     }
+    $utilisateur = new Utilisateur(null, 'admin', 'admin@admin.com', '0123456789', '$2y$10$o.0Iftav5sQFQrPYHUr4BO8KZ50bC8Zi0HWjZ1JyqRB70SUf2ofyW', "true");
 
     // Création de membres d'équipes joueurs
     for ($i = 21; $i <= 44; $i++) {
