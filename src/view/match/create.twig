@@ -1,0 +1,47 @@
+{% extends 'base.twig' %}
+
+{% block body %}
+<form id="matchForm" action="/match/create" method="POST" class="max-w-md mx-auto mt-4">
+    <div class="bg-yellow-500 text-white px-2 py-1 rounded-md shadow-lg mb-4">
+        Nouveau match
+    </div>
+    {% if error != 0 %}
+        <div class="bg-red-500 text-white px-2 py-1 rounded-md shadow-lg mb-4">
+            {{error}}
+        </div>
+    {% endif %}
+    <!-- Ajout des champs Équipe 1 et Équipe 2 -->
+    <div class="mb-4">
+        <label for="equipe1" class="block text-gray-700 text-sm font-bold mb-2">Équipe 1</label>
+        <select id="equipe1" name="equipe1" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            {% for equipe in equipes %}
+                <option value="{{ equipe.id_equipe }}">{{ equipe.nom_equipe }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-4">
+        <label for="equipe2" class="block text-gray-700 text-sm font-bold mb-2">Équipe 2</label>
+        <select id="equipe2" name="equipe2" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            {% for equipe in equipes %}
+                <option value="{{ equipe.id_equipe }}">{{ equipe.nom_equipe }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-4">
+        <label for="date" class="block text-gray-700 text-sm font-bold mb-2">Date</label>
+        <input type="date" id="date" name="date_debut" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    </div>
+    <div class="mb-4">
+        <label for="address-input" class="block text-gray-700 text-sm font-bold mb-2">Lieu</label>
+        <input id="address-input" name="lieu" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    </div>
+    <input type="hidden" id="address_id" name="address_id">
+    <input type="hidden" id="id_evenement" name="id_evenement" value="{{ id_evenement }}">
+    <div class="mb-4">
+        <label for="heure" class="block text-gray-700 text-sm font-bold mb-2">Heure</label>
+        <input type="time" id="heure" name="heure" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    </div>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Créer un nouveau match</button>
+    </div>
+</form>
+{% endblock %}

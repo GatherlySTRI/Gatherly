@@ -6,6 +6,9 @@
     <title>Gatherly</title>
     <link href="/public/output.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/public/images/logo.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
+
 </head>
 <script>
   function toggleDropdownAccount() {
@@ -24,6 +27,67 @@
       dropdown.style.display = "none";
     }
   }
+  window.onload = function() {
+  var addressIdInput = document.getElementById('address_id');
+    var input = document.getElementById("address-input");
+    console.log("Input element: ", input); // Log the input element
+  
+    var awesomplete = new Awesomplete(input, {
+      list: [],
+      data: function (item) {
+        var data = {
+          label: item ? item.label : '',
+          value: item ? item.value : '',
+        };
+        console.log("Data: ", data); // Log the data
+        return data;
+      },
+      filter: Awesomplete.FILTER_CONTAINS
+    });
+    input.addEventListener("keyup", function() {
+      console.log("Keyup event triggered"); // Log when keyup event is triggered
+      if (input.value.length >= 3) {
+        console.log("Input value length is greater than or equal to 3"); // Log when input value length is greater than or equal to 3
+        fetch('https://api-adresse.data.gouv.fr/search/?q=' + encodeURIComponent(input.value))
+          .then(response => response.json())
+          .then(data => {
+            console.log("Fetched data: ", data); // Log the fetched data
+          if (Array.isArray(data.features)) {
+              var newList = data.features.map(function(feature) {
+                  var featureData = {
+                      label: feature && feature.properties ? feature.properties.label : '',
+                      value: feature && feature.properties ? feature.properties.label : '',
+                      id: feature && feature.properties ? feature.properties.id : ''
+                  };
+                  console.log("Feature data: ", featureData); // Log the feature data
+                  return featureData;
+              });
+              awesomplete.list = newList;
+              awesomplete.evaluate();
+          } else {
+              console.log("data.features is not an array");
+          }
+            console.log("Awesomplete list: ", awesomplete.list); // Log the Awesomplete list
+          });
+      }
+    });
+    input.addEventListener('awesomplete-selectcomplete', function(e) {
+        fetch('https://api-adresse.data.gouv.fr/search/?q=' + encodeURIComponent(e.text.value))
+          .then(response => response.json())
+          .then(data => {
+            console.log("Fetched data: ", data); // Log the fetched data
+            if (Array.isArray(data.features)) {
+              var feature = data.features[0];
+              console.log("Feature: ", feature); // Log the feature
+              if (feature && feature.properties) {
+                addressIdInput.value = feature.properties.id;
+              }
+            } else {
+              console.log("data.features is not an array");
+            }
+          });
+    });
+  };
 </script>
 <body class="flex-col min-h-screen">
 <!-- component -->
@@ -64,6 +128,7 @@
                   </button>
                   <div id="dropdown_account" class="absolute right-0 mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10" style="display: none;">
                       <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Compte</a>
+                      <a href="/equipe/create" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Créer une équipe</a>
                       <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">Aide</a>
                       <a href="/logout" class="block px-4 py-2 text-sm text-red-700 hover:bg-red-600 hover:text-white">Déconnexion</a>
                   </div>

@@ -1,19 +1,49 @@
 {% extends "base.twig" %}
 
 {% block body %}
+<div class="max-w-md mx-auto mt-4">
+    <div class="bg-yellow-500 text-white px-2 py-1 rounded-md shadow-lg mb-4">
+        {{evenement.nom_evenement}}
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Type de rugby</label>
+        <p class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            {{evenement.type_rugby}}
+        </p>
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Variante</label>
+        <p class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            {{evenement.variante_rugby}}
+        </p>
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Catégorie</label>
+        <p class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            {{evenement.categorie_evenement}}
+        </p>
+    </div>
+    {% if session.id_utilisateur == organiser.id_organisateur or session.est_Admin == true %} 
+        <div class="mb-4">
+            <a href="/event/edit?id={{evenement.id_evenement}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Modifier</a>
+        </div>
+        {% if evenement.categorie_evenement == "Match" %}
+            <div class="mb-4">
+                <a href="/match/create?id_evenement={{evenement.id_evenement}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Ajouter un match</a>
+            </div>
+        {% endif %}
+    {% endif %}
+    <div class="mb-4">
+        <a href="/event/show?id={{evenement.id_evenement}}&voir_matchs=1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Voir tous les matchs</a>
+    </div>
+</div>
 
-{{evenement['nom']}}
-{{evenement['description']}}
-{{evenement['type']}}
-{{evenement['variante']}}
-{{evenement['categorie']}}
-{{evenement['date_debut']}}
-{{evenement['date_fin']}}
-
-{{evenement.nom_evenement}} </br>
-{{evenement.type_rugby}} </br>
-{{evenement.variante_rugby}} </br>
-{{evenement.categorie_evenement}} </br>
-
-
+{% if voir_matchs == 1 and evenement.categorie_evenement == "Match"  %}
+<div class="flex justify-center mt-4 bg-gray-500 text-white px-2 py-1 rounded-md shadow-lg mb-4">
+    <h2 class="text-center text-2xl font-bold mb-4">Liste des matchs</h2>
+</div>
+<div class="flex flex-wrap justify-center gap-4 p-1 mt-4">
+    {% include 'match/matchUnit.twig' with {'matchs': matchs, 'event': evenement, 'equipe1': equipe1, 'equipe2': equipe2} %}
+</div>
+{% endif %}
 {% endblock %}

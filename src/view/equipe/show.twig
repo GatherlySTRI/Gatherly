@@ -1,0 +1,29 @@
+{% extends 'base.twig' %}
+
+{% block body %}
+
+{% if equipes|length == 0 %}
+    <div class="bg-gray-500 text-white px-2 py-1 rounded-md shadow-lg mb-4 mt-5 max-w-md mx-auto">
+        <p>
+            Aucune équipe
+        </p>
+        <p>
+            Créer une en cliquant sur le bouton ci-dessous.
+        </p>
+        <p>
+            Chaque équipe crée n'est utilisable que par vous
+        </p>
+    </div>
+    <div class="flex justify-center">
+        <a href="/equipe/create" class="bg-yellow-500 text-white px-4 py-2 rounded-md shadow-lg">Créer ma première équipe</a>
+    </div>
+{% else %}
+    <div class="flex-grow mb-4">
+        <h1 class="text-3xl font-bold text-black mt-4 mb-4 mx-auto text-center">Liste des équipes</h1>
+        <div class="flex flex-wrap justify-center gap-4 p-1">
+            {% include 'equipe/equipeUnit.twig' with {'equipes': equipes, 'personne': personne}%}
+        </div>
+    </div>
+{% endif %}
+
+{% endblock %}
