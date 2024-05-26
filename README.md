@@ -4,20 +4,24 @@ Projet universaire d'un site de gestion d'évènement rygbystique.
 ![Static Badge](https://img.shields.io/badge/PHP-blue)
 ![Static Badge](https://img.shields.io/badge/TWIG-green)
 
-# Mise en place #
+## Mise en place ##
 
 ## Prérequis ##
 - Docker
 - Docker Compose Plugin
 
-## Docker Compose ##
+### Docker Compose ###
 
 ```
 docker compose up --build -d
 ```
 
-## BDD ##
+### BDD ###
 
 ```
 docker exec -it web_server php test/models/creation_JDD.php
 ```
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
